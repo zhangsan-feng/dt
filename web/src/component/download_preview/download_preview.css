@@ -1,0 +1,23 @@
+.preview-container {
+    /*height: 70vh;*/
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.container-box{
+    position: relative;
+}
+
+/*.box-resource{*/
+/*    padding: 5px;*/
+/*    column-count: 6;*/
+/*    column-gap: 10px*/
+/*}*/
+
+.box-resource {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 5px;
+}

@@ -503,7 +503,7 @@ class BrowserFingerprintGenerator:
         generate_edge_fingerprint():
             生成 Edge 浏览器指纹。
 
-        _generate_fingerprint(platform="Win32"):
+        _generate_fingerprint(_platform="Win32"):
             根据给定的参数生成浏览器指纹字符串。
 
     使用示例:
@@ -554,7 +554,7 @@ class BrowserFingerprintGenerator:
         根据给定的参数生成浏览器指纹字符串。 (Generate a browser fingerprint string based on the given parameters.)
 
         Args:
-            platform (str): 操作系统平台 (Operating system platform).
+            platform (str): 操作系统平台 (Operating system _platform).
 
         Returns:
             str: 生成的浏览器指纹字符串 (Generated browser fingerprint string).
@@ -850,13 +850,13 @@ if __name__ == "__main__":
 
     # GET
     url = "https://www.douyin.com/aweme/v1/web/aweme/detail/?"
-    params = "device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id=MS4wLjABAAAArDVBosPJF3eIWVEFp0szuJ-e1V_-rK0ieJeWwpE77E8&max_cursor=0&locate_query=false&show_live_replay_strategy=1&need_time_list=1&time_list_query=0&whale_cut_token=&cut_version=1&count=18&publish_video_strategy_type=2&from_user_page=1&update_version_code=170400&pc_client_type=1&pc_libra_divert=Windows&support_h265=1&support_dash=0&version_code=290100&version_name=29.1.0&cookie_enabled=true&screen_width=1920&screen_height=1080&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=131.0.0.0&browser_online=true&engine_name=Blink&engine_version=131.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=8&platform=PC&downlink=10&effective_type=4g&round_trip_time=50"
+    params = "device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id=MS4wLjABAAAArDVBosPJF3eIWVEFp0szuJ-e1V_-rK0ieJeWwpE77E8&max_cursor=0&locate_query=false&show_live_replay_strategy=1&need_time_list=1&time_list_query=0&whale_cut_token=&cut_version=1&count=18&publish_video_strategy_type=2&from_user_page=1&update_version_code=170400&pc_client_type=1&pc_libra_divert=Windows&support_h265=1&support_dash=0&version_code=290100&version_name=29.1.0&cookie_enabled=true&screen_width=1920&screen_height=1080&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=131.0.0.0&browser_online=true&engine_name=Blink&engine_version=131.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=8&_platform=PC&downlink=10&effective_type=4g&round_trip_time=50"
     body = ""
     print(url + abogus.generate_abogus(params=params, body=body)[0])
 
     # POST
     url = "https://www.douyin.com/aweme/v2/web/aweme/stats/?"
-    params = "device_platform=webapp&aid=6383&channel=channel_pc_web&pc_client_type=1&pc_libra_divert=Windows&update_version_code=170400&support_h265=1&support_dash=0&version_code=170400&version_name=17.4.0&cookie_enabled=true&screen_width=1920&screen_height=1080&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=131.0.0.0&browser_online=true&engine_name=Blink&engine_version=131.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=8&platform=PC&downlink=10&effective_type=4g&round_trip_time=50"
+    params = "device_platform=webapp&aid=6383&channel=channel_pc_web&pc_client_type=1&pc_libra_divert=Windows&update_version_code=170400&support_h265=1&support_dash=0&version_code=170400&version_name=17.4.0&cookie_enabled=true&screen_width=1920&screen_height=1080&browser_language=zh-CN&browser_platform=Win32&browser_name=Edge&browser_version=131.0.0.0&browser_online=true&engine_name=Blink&engine_version=131.0.0.0&os_name=Windows&os_version=10&cpu_core_num=12&device_memory=8&_platform=PC&downlink=10&effective_type=4g&round_trip_time=50"
     body = "aweme_type=0&item_id=7467485482314763572&play_delta=1&source=0"
     print(url + abogus.generate_abogus(params=params, body=body)[0])
 

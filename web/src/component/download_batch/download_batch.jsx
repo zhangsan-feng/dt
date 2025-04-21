@@ -33,9 +33,9 @@ const DownloadBatch = ()=>{
 
     useEffect(() => {
         DownLoadTaskApi().then(res=>{
-            console.log(res)
+            // console.log(res.data)
             setEditState(false);
-            setDataSource(res)
+            setDataSource(res.data)
         })
     }, [editState]);
 
@@ -43,19 +43,20 @@ const DownloadBatch = ()=>{
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id'},
         {title: '链接', dataIndex: 'link', key: 'link'},
-        {title: '作者', dataIndex: 'author', key: 'author'},
+        {title: '作者', dataIndex: 'nickname', key: 'nickname'},
         {title: '用户id', dataIndex: 'user_id', key: 'user_id'},
         {title: '下载', dataIndex: 'total', key: 'total'},
-        {title: '状态', dataIndex: 'status', key: 'status', render:(source)=>{
+        {title: '状态', dataIndex: 'status', key: 'status', render:(_, source)=>{
+            // console.log(source.status === 0)
             if (source.status === 0) {
                 return <Tag color="blue">等待中</Tag>
             }else {
                 return <Tag color="green">下载中</Tag>
             }
             }},
-        {width:150, render: (source)=>{
+        {width:150, render: (_, source)=>{
             if(source !== 1){
-                return <Button onClick={()=>{
+                return <Button color="pink"  variant="solid" onClick={()=>{
                     DownLoadTaskDelApi({"id":source.id}).then(res=>{
                         message.warning({content: res.data}).then()
                         setEditState(true);
@@ -63,17 +64,12 @@ const DownloadBatch = ()=>{
                 }}>删除</Button>
             }
         }},
-        {width:150, render: (source)=>{
-                if(source !== 1){
-                    return <Button>单独下载</Button>
-                }
-        }},
     ];
     return (
         <div style={{width:"100%",height:"100%"}} >
             <div style={{display:'flex',}}>
-                <Search placeholder="添加链接" onSearch={Submit} enterButton="提交" style={{width:600}}/>
-                <Search placeholder="搜索"    onSearch={Submit} enterButton="搜索" style={{width:400, marginLeft:20}}/>
+                <Search placeholder="添加链接" onSearch={Submit} enterButton="提交" style={{width:400}}/>
+                {/*<Search placeholder="搜索"    onSearch={Submit} enterButton="搜索" style={{width:400, marginLeft:20}}/>*/}
                 <Button color="cyan" variant="solid" style={{marginLeft:20, width:100}}>
                     开始批量下载
                 </Button>

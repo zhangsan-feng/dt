@@ -4,7 +4,7 @@
 
 
 import asyncio
-from douyin.sign import a_bogus_tk, ms_token, web_id
+from _platform.douyin.sign import a_bogus_tk, ms_token, web_id
 from http.cookies import SimpleCookie
 
 

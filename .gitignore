@@ -1,6 +1,6 @@
 .idea
 /download
-
+store.db
 __pycache/
 **/__pycache__/
 **/__pycache__/*

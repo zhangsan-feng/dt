@@ -1,7 +1,7 @@
 import asyncio
 import httpx
-from douyin import douyin_data_handler
-from douyin.sign import gen_like_params_sign
+from _platform.douyin import douyin_data_handler
+from _platform.douyin.sign import gen_like_params_sign
 
 
 async def douyin_like(sec_user_id, user_agent, cookie):
@@ -15,7 +15,7 @@ async def douyin_like(sec_user_id, user_agent, cookie):
         'referer': 'https://www.douyin.com/user/self?from_tab_name=main&showTab=favorite_collection',
         'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
         'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
+        'sec-ch-ua-_platform': '"Windows"',
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
@@ -56,7 +56,7 @@ async def douyin_like(sec_user_id, user_agent, cookie):
             'os_version': '10',
             'cpu_core_num': '16',
             'device_memory': '8',
-            'platform': 'PC',
+            '_platform': 'PC',
             'downlink': '10',
             'effective_type': '4g',
             'round_trip_time': '200',

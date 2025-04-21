@@ -1,9 +1,10 @@
+import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from routers import api_router
-
+from entity.config_enetity import config_query_
 app = FastAPI()
 
 app.add_middleware(
@@ -15,7 +16,7 @@ app.add_middleware(
 
 app.mount(
     "/download",
-    StaticFiles(directory="./download", check_dir=False),
+    StaticFiles(directory=config_query_().save_path, check_dir=False),
     name="download"
 )
 app.include_router(api_router, prefix="/api")

@@ -12,4 +12,6 @@ async def bilibili_detail(bvid, cid):
 
 
 if __name__ == '__main__':
-    asyncio.run(bilibili_detail())
+    asyncio.run(
+        bilibili_detail("", "")
+    )

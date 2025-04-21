@@ -1,6 +1,6 @@
 from fastapi import Request
 from api.config import config_edit, config_query
-from api.download_task import download_task_query,download_task_del, download_task_add
+from api.download_task import download_task_query,download_task_del, download_task_add, task_start
 from api.preview import preview
 from api.link_analysis import link_analysis
 from api.download_batch import download_batch_adapter
@@ -28,6 +28,10 @@ async def task_del_api(request: Request):
 @api_router.post("/task_add")
 async def task_add_api(request: Request):
     return await download_task_add(request)
+
+@api_router.get("/task_start")
+async def task_start_api():
+    await task_start()
 
 @api_router.get("/preview")
 async def preview_api(request: Request):

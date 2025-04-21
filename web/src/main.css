@@ -4,10 +4,10 @@ html{
     padding: 0;
     margin: 0;
 
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* IE/Edge */
-    user-select: none;         /* Generic (also works for Chrome) */
+    /*-webkit-user-select: none; !* Safari *!*/
+    /*-moz-user-select: none;    !* Firefox *!*/
+    /*-ms-user-select: none;     !* IE/Edge *!*/
+    /*user-select: none;         !* Generic (also works for Chrome) *!*/
 }
 
 body{

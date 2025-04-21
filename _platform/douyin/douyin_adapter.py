@@ -1,7 +1,7 @@
 import httpx
-from douyin.douyin_detail import video_detail
-from douyin.douyin_post import douyin_post
-from entity.config_enetity import config
+from _platform.douyin.douyin_detail import video_detail
+from _platform.douyin.douyin_post import douyin_post
+from config import config
 
 
 

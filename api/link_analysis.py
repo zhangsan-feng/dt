@@ -1,6 +1,6 @@
 
 from fastapi import Request
-from douyin.douyin_adapter import douyin_adapter
+from _platform.douyin.douyin_adapter import douyin_adapter
 from urils import match_url
 
 

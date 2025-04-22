@@ -4,8 +4,9 @@ from api.download_task import download_task_query,download_task_del, download_ta
 from api.preview import preview
 from api.link_analysis import link_analysis
 from api.download_batch import download_batch_adapter
-
 from fastapi import APIRouter
+from api.record import record_query_api_, record_delete_api_
+
 api_router = APIRouter()
 
 
@@ -44,3 +45,11 @@ async def link_analysis_api(request: Request):
 @api_router.post("/download_batch")
 async def download_batch_api(request: Request):
     return await download_batch_adapter(request)
+
+@api_router.get("/record_query")
+async def record_query_api(request: Request):
+    return await record_query_api_()
+
+@api_router.post("/record_delete")
+async def record_delete_api(request: Request):
+    return await record_delete_api_(request)

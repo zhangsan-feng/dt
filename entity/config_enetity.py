@@ -29,7 +29,7 @@ with Session(engine) as session:
 
             value = ConfigEntity(
                 project_path = project_dir,
-                save_path = project_dir + "/download",
+                save_path = project_dir + "/download/",
                 douyin_cookie = "NULL",
                 proxy = "NULL",
                 update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -43,8 +43,10 @@ with Session(engine) as session:
 def config_edit_(obj):
     with Session(engine) as session:
         model = session.exec(select(ConfigEntity).where(ConfigEntity.id == 1)).first()
+        if not "download" in obj["save_path"]:
+            obj["save_path"] = obj["save_path"] + "/download/"
+
         if model:
-            model.project_path = obj["project_path"]
             model.save_path = obj["save_path"]
             model.douyin_cookie = obj["douyin_cookie"]
             model.proxy = obj["proxy"]

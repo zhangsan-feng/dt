@@ -56,7 +56,7 @@ async def video_detail(aweme_id, user_agent, cookie):
     # print(json.dumps(params, ensure_ascii=False , indent=4))
     async with httpx.AsyncClient() as client:
         response = await client.get('https://www.douyin.com/aweme/v1/web/aweme/detail/', params=params, headers=headers)
-
+    # print(response)
     if response:
         json_response = response.json()["aweme_detail"]
         # print(json_response)
@@ -65,14 +65,20 @@ async def video_detail(aweme_id, user_agent, cookie):
 
 if __name__ == '__main__':
     '''
+    live 动态
     0.28 江西的饭怎么能这么辣🥹 # livephoto # 随拍  https://v.douyin.com/pCAV6RWTeQo/ 复制此链接，打开抖音搜索，直接观看视频！ 08/09 iPX:/ F@u.fo
     https://www.douyin.com/note/7486062640565882151
     
+    视频
     5.64 05/13 h@o.Dh lpQ:/ 不看牙口挑战3.0 # 永劫无间 # 季莹莹 # cos # 直播录屏分享  https://v.douyin.com/ZKT-e87IvdU/ 复制此链接，打开Dou音搜索，直接观看视频！
     https://www.douyin.com/video/7470885299535629622
     
+    图片
     5.17 06/03 A@g.Bt Nws:/ 右滑帮学姐摘眼镜# 永劫无间 # 顾清寒 # 春日序曲 # cos # 壁纸  https://v.douyin.com/cxvBbjQLlxg/ 复制此链接，打开Dou音搜索，直接观看视频！
     https://www.douyin.com/note/7476688986325486887
+    
+    图片
+    1.58 复制打开抖音，看看【絮辰的图文作品】# 动漫少女 # 动漫女头 # 二次元 # 女生头... https://v.douyin.com/945qoAywnMI/ 05/16 o@q.rE aaA:/
     '''
     asyncio.run(
         video_detail(

@@ -16,10 +16,10 @@ const DownloadSettings = ()=>{
     }, []);
     const onFinish = (values) => {
         ConfigEditApi(values).then(res=>{
-            console.log(res)
+            // console.log(res)
             message.warning({content:res.data})
         })
-      console.log('Success:', values);
+      // console.log('Success:', values);
     };
 
 

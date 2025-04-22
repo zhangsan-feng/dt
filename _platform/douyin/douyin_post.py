@@ -1,10 +1,8 @@
 import asyncio
-
 import httpx
-
 from _platform.douyin import douyin_data_handler
 from _platform.douyin.sign import gen_params_sign
-
+from urils import random_sleep
 
 async def douyin_post(sec_user_id, user_agent, cookie):
 
@@ -79,9 +77,11 @@ async def douyin_post(sec_user_id, user_agent, cookie):
             # print(json_response)
             for data in json_response:
                 await douyin_data_handler(data, headers)
+
             if response.json()["has_more"] == 0:
                 break
             max_cursor = response.json()["max_cursor"]
+        random_sleep()
 
 if __name__ == '__main__':
     """

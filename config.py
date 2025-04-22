@@ -1,8 +1,44 @@
-
+import os
+import logging
+from logging.handlers import RotatingFileHandler
+from entity.config_enetity import config_query_
 
 class Config:
     def __init__(self):
-        pass
+        config_ = config_query_()
+        self.project_path: str = config_.project_path
+        self.save_path: str = config_.save_path
+        if not os.path.exists(self.save_path): os.makedirs(self.save_path)
+        self.douyin_cookie: str = config_.douyin_cookie
+        self.douyin_path = self.save_path + "/douyin/"
+        if not os.path.exists(self.douyin_path): os.makedirs(self.douyin_path)
+        self.proxy: str = config_.proxy
+        self.update_time: str = config_.update_time
+
+        self.host = "127.0.0.1"
+        self.port = 8000
+        self.address = self.host + ":" + str(self.port)
+        self.resource_path = "http://" + self.address + "/download/"
 
 
-config = Config()
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s'
+)
+
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(formatter)
+
+file_handler = RotatingFileHandler(
+    'app.log', maxBytes=5 * 1024 * 1024, backupCount=3
+)
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(console_handler)
+# logger.addHandler(file_handler)

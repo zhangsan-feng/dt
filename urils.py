@@ -22,8 +22,8 @@ def match_url(text):
 
 def word_analysis(text):
     text = re.sub(r'[^a-zA-Z0-9\u4e00-\u9fa5]', '', text)
-    if len(text) > 20:
-        return text[:20]
+    if len(text) > 30:
+        return text[:30]
     return text
 
 def max_index(obj, key):
@@ -43,6 +43,8 @@ def gen_uid():
     result = f"{timestamp}{random_str}"
     return result
 
+def random_sleep():
+    time.sleep(random.uniform(3.0, 6.0))
 
 class HttpRequest:
     def __init__(self, url, params, proxy, headers):

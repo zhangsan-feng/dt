@@ -43,9 +43,8 @@ const DownloadBatch = ()=>{
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id'},
         {title: '链接', dataIndex: 'link', key: 'link'},
-        {title: '作者', dataIndex: 'nickname', key: 'nickname'},
-        {title: '用户id', dataIndex: 'user_id', key: 'user_id'},
-        {title: '下载', dataIndex: 'total', key: 'total'},
+        {title: '作者', dataIndex: 'author', key: 'author'},
+        {title: '作者id', dataIndex: 'user_id', key: 'user_id'},
         {title: '状态', dataIndex: 'status', key: 'status', render:(_, source)=>{
             // console.log(source.status === 0)
             if (source.status === 0) {

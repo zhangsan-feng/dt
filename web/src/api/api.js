@@ -11,3 +11,6 @@ export const FilePreviewApi = (p)=> HttpGet(`/api/preview`, p);
 export const DownLoadTaskAddApi = (p)=> HttpPost(`/api/task_add`, p);
 export const DownLoadTaskDelApi = (p)=> HttpPost(`/api/task_del`, p);
 export const DownLoadTaskApi = (p)=> HttpGet(`/api/task_query`, p);
+export const DownLoadRecordQueryApi = (p)=> HttpGet(`/api/record_query`, p);
+export const DownLoadRecordDeleteApi = (p)=> HttpPost(`/api/record_delete`, p);
+

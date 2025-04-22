@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from routers import api_router
-from entity.config_enetity import config_query_
+from config import Config
 app = FastAPI()
 
 app.add_middleware(
@@ -13,16 +13,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["Range"]
 )
-
+config = Config()
 app.mount(
     "/download",
-    StaticFiles(directory=config_query_().save_path, check_dir=False),
+    StaticFiles(directory=config.save_path, check_dir=False),
     name="download"
 )
 app.include_router(api_router, prefix="/api")
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run('main:app', host=config.host, port=config.port, reload=True)
 
 """
 https://github.com/wbt5/real-url

@@ -25,7 +25,6 @@ if __name__ == '__main__':
     uvicorn.run('main:app', host=config.host, port=config.port, reload=True)
 
 """
-https://github.com/Cloxl/xhshow
 https://github.com/wbt5/real-url
 https://github.com/ihmily/DouyinLiveRecorder
 https://github.com/hr3lxphr6j/bililive-go

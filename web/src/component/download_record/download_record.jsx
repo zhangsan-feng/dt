@@ -74,8 +74,7 @@ const DownloadRecord = ()=>{
         {title: '作者', dataIndex: 'author', key: 'author',ellipsis:true},
         {title: '作者id', dataIndex: 'author_id', key: 'author_id',ellipsis:true},
         {title: '文案', key: 'desc', dataIndex: 'desc',ellipsis:true},
-        {title: '', key: '', dataIndex: '',
-            render: (text, source) => {
+        {title: '', key: '', dataIndex: '', width:100, render: (text, source) => {
                 return <Button onClick={()=>{
                     DownLoadRecordDeleteApi({"id":source.id}).then(res=>{
                         setDataChange(true)
@@ -83,10 +82,7 @@ const DownloadRecord = ()=>{
                 }}> 删除</Button>
             }
         },
-        {
-            title: '文件',
-            key: '文件',
-            render: (_, source) => (
+        {title: '', key: '', width:100, render: (_, source) => (
                 <Space size="middle">
                     <LocalizedModal source={source}/>
                 </Space>

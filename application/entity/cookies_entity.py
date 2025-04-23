@@ -1,6 +1,6 @@
-from sqlmodel import SQLModel, Field, create_engine
-from sqlalchemy import String, Integer, Column, Text
-from entity import engine
+from sqlmodel import SQLModel, Field
+from sqlalchemy import Integer, Column, Text
+from application.entity import engine
 
 class CookieToConfigEntyty(SQLModel, table=True):
     __tablename__ = "config_cookies"

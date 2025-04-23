@@ -5,6 +5,7 @@ from config import Config
 
 
 
+
 async def douyin_adapter(link, user_agent):
 
     if "v.douyin.com" in link:

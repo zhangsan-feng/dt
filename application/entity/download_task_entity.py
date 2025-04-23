@@ -1,7 +1,7 @@
 from datetime import datetime
-from sqlmodel import SQLModel, Field, create_engine, Session, select
+from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column
-from entity import engine
+from application.entity import engine
 
 class DownLoadTaskEntity(SQLModel, table=True):
     __tablename__ = "download_task"

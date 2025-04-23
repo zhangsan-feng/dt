@@ -1,6 +1,5 @@
-import httpx
+from utils.http import HttpRequest
 import asyncio
-
 
 async def bilibili_detail(bvid, cid):
 

@@ -1,17 +1,14 @@
-import os
-from datetime import datetime
-from sqlmodel import SQLModel, Field, create_engine
-from sqlalchemy import String, Integer, Column, Text
-from sqlmodel import Session, select
-from entity import engine
+from sqlmodel import SQLModel, Field, Session, select
+from sqlalchemy import String, Integer, Column, Text, desc
+from application.entity import engine
 
 
 class RecordEntity(SQLModel, table=True):
     __tablename__ = "record"
     id: int = Field(default=None, sa_column=Column(Integer, primary_key=True, autoincrement=True))
-    aweme_id:int = Field(default=None, sa_column=Column(String))
+    aweme_id:str = Field(default=None, sa_column=Column(String))
     author: str = Field(default=None, sa_column=Column(String))
-    author_id: int = Field(default=None, sa_column=Column(Integer))
+    author_id: str = Field(default=None, sa_column=Column(String))
     desc: str = Field(default=None, sa_column=Column(Text))
     files: str = Field(default=None, sa_column=Column(Text))
 
@@ -25,9 +22,14 @@ async def record_add(obj):
         session.commit()
 
 
-async def record_query():
+async def record_query(page=1):
     with Session(engine) as session:
-        results = session.exec(select(RecordEntity)).all()
+        results = session.exec(
+            select(RecordEntity)
+            .order_by(desc(RecordEntity.id))
+            .offset(page - 1 * 100)
+            .limit(100)
+        ).all()
         # print(results)
         return results
 

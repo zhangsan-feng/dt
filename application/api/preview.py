@@ -3,7 +3,7 @@ import os
 from config import Config
 
 
-async def preview(request: Request):
+async def preview_api(request: Request):
     page = request.query_params.get("page")
     page = int(page) if page else 0
     config = Config()

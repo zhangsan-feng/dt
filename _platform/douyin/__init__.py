@@ -1,7 +1,8 @@
 
-from urils import *
+from utils import word_analysis, max_index
+from utils.download import download_file
 from config import Config
-from entity.record_entity import record_add
+from application.entity.record_entity import record_add
 
 async def douyin_data_handler(obj, headers):
     video_link = None
@@ -12,7 +13,6 @@ async def douyin_data_handler(obj, headers):
     aweme_id      = obj["aweme_id"]
     author_id       = obj["author"]["sec_uid"]
     author        = obj["author"]["nickname"]
-    video_link    = video_link
     image_link    = obj["images"] if obj["images"] else None
     music_link    = obj["music"] if obj["music"] else None
     audio_link    = obj["music"] if obj["music"] else None
@@ -22,6 +22,7 @@ async def douyin_data_handler(obj, headers):
     config = Config()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
     file = config.douyin_path + word_analysis(author) + "_" + aweme_id + "_"
+
     record_obj = {
         "aweme_id": aweme_id,
         "author": author,
@@ -29,6 +30,7 @@ async def douyin_data_handler(obj, headers):
         "desc": desc,
         "files":[]
     }
+
     if image_link:
         for image in image_link:
             image_file = file + word_analysis(image["uri"]) + ".png"
@@ -50,7 +52,16 @@ async def douyin_data_handler(obj, headers):
         await download_file(video_url, video_file, headers)
         record_obj["files"].append(config.resource_path + video_file.replace(config.save_path, ""))
 
+    if music_link:
+        pass
+
+    if audio_link:
+        pass
+
     record_obj["files"] = ",".join(record_obj["files"])
+
+
+
     await record_add(record_obj)
 
 

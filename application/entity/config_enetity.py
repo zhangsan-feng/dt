@@ -1,9 +1,8 @@
 import os
 from datetime import datetime
-from sqlmodel import SQLModel, Field, create_engine
+from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column, Text
-from sqlmodel import Session, select
-from entity import engine
+from application.entity import engine
 
 
 class ConfigEntity(SQLModel, table=True):
@@ -19,14 +18,17 @@ class ConfigEntity(SQLModel, table=True):
 # print(CreateTable(ConfigEntity.__table__).compile(engine))
 SQLModel.metadata.create_all(engine)
 
+current_file_path = os.path.abspath(__file__)
+project_dir = os.path.dirname(current_file_path)
+project_dir = os.path.dirname(project_dir)
+project_dir = os.path.dirname(project_dir).replace("\\", "/")
+print(f"工作目录: {project_dir}")
+
+
 with Session(engine) as session:
     with Session(engine) as session:
         model = session.exec(select(ConfigEntity).where(ConfigEntity.id == 1)).first()
         if not model:
-            current_file_path = os.path.abspath(__file__)
-            project_dir = os.path.dirname(os.path.dirname(current_file_path)).replace("\\", "/")
-            # print(f"项目目录: {project_dir}")
-
             value = ConfigEntity(
                 project_path = project_dir,
                 save_path = project_dir + "/download/",

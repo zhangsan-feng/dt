@@ -14,7 +14,6 @@ async def config_edit_api(request: Request):
 
 
 async def config_query_api():
-    pass
 
     return {
         "code": 200,

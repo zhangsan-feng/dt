@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from routers import api_router
 from config import Config
+
+
 app = FastAPI()
 
 app.add_middleware(
@@ -22,9 +24,14 @@ app.mount(
 app.include_router(api_router, prefix="/api")
 
 if __name__ == '__main__':
+    # os.remove("./store.duckdb")
+    # from application.db import DuckDBConfigure
+    # DuckDBConfigure().init_duckdb()
     uvicorn.run('main:app', host=config.host, port=config.port, reload=True)
 
 """
+
+https://github.com/iuroc/bilidown
 https://github.com/wbt5/real-url
 https://github.com/ihmily/DouyinLiveRecorder
 https://github.com/hr3lxphr6j/bililive-go

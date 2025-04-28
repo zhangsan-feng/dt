@@ -1,8 +1,11 @@
 import os
 from datetime import datetime
+
+from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column, Text
 from application.entity import engine
+from application.db import DuckDBConfigure
 
 
 class ConfigEntity(SQLModel, table=True):
@@ -14,9 +17,8 @@ class ConfigEntity(SQLModel, table=True):
     proxy: str = Field(sa_column=Column(String))
     update_time:str = Field(sa_column=Column(String))
 
-
 # print(CreateTable(ConfigEntity.__table__).compile(engine))
-SQLModel.metadata.create_all(engine)
+# SQLModel.metadata.create_all(engine)
 
 current_file_path = os.path.abspath(__file__)
 project_dir = os.path.dirname(current_file_path)
@@ -43,6 +45,7 @@ with Session(engine) as session:
 
 
 def config_edit_(obj):
+
     with Session(engine) as session:
         model = session.exec(select(ConfigEntity).where(ConfigEntity.id == 1)).first()
         if not "download" in obj["save_path"]:
@@ -57,6 +60,7 @@ def config_edit_(obj):
             session.commit()
 
 def config_query_():
+
     with Session(engine) as session:
         results = session.exec(select(ConfigEntity).where(ConfigEntity.id == 1)).first()
         # print(results)

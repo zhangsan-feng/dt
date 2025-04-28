@@ -58,12 +58,12 @@ const DownloadPreview = ()=>{
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 100 : 500;
+        return content ? content.clientHeight - 200 : 500;
     });
     useLayoutEffect(() => {
         const handleResize = () => {
             const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight -100);}
+            if (content) {setTableHeight(content.clientHeight - 200);}
         };
         window.addEventListener('resize', handleResize);
         return () => {window.removeEventListener('resize', handleResize);};
@@ -123,8 +123,8 @@ const DownloadPreview = ()=>{
 
     return (
         <div className="preview-container"  ref={containerRef} style={{height:tableHeight}}>
-            <div className="container-box">
-                <div className="box-resource">
+            <div className="preview-container-box">
+                <div className="preview-container-box-resource">
                         {
                             data.slice(0, renderIndex).map((items, index) => {
                                 if (items.includes(".png")) {

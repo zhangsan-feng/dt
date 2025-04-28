@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column
 from application.entity import engine
@@ -14,7 +16,7 @@ class DownLoadTaskEntity(SQLModel, table=True):
     update_time: str = Field(sa_column=Column(String))
 
 # print(CreateTable(DownLoadTaskEntity.__table__).compile(engine))
-SQLModel.metadata.create_all(engine)
+# SQLModel.metadata.create_all(engine)
 
 
 async def task_update(user_id, status, author, platform):

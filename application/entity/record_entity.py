@@ -1,3 +1,4 @@
+from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column, Text, desc
 from application.entity import engine
@@ -13,8 +14,8 @@ class RecordEntity(SQLModel, table=True):
     files: str = Field(default=None, sa_column=Column(Text))
 
 
-# print(CreateTable(ConfigEntity.__table__).compile(engine))
-SQLModel.metadata.create_all(engine)
+# print(CreateTable(RecordEntity.__table__).compile(engine))
+# SQLModel.metadata.create_all(engine)
 
 async def record_add(obj):
     with Session(engine) as session:

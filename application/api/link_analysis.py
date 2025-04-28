@@ -10,9 +10,11 @@ async def link_analysis_api(request: Request):
     link = json_body["link"]
     link = match_url(link)
     logger.info(link)
-    user_agent = request.headers["User-Agent"]
+    user_agent = dict(request.headers)["user-agent"]
+    try:
+        if "douyin" in link:
+            await douyin_adapter(link, user_agent)
+    except Exception as e:
+        return {"code":200, "data":"error", "msg":""}
 
-    if "douyin" in link:
-        await douyin_adapter(link, user_agent)
-
-    return {"code":200, "data":"", "msg":""}
+    return {"code":200, "data":"success", "msg":""}

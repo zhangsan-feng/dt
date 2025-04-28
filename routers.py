@@ -1,7 +1,7 @@
 from fastapi import Request
 from fastapi import APIRouter
 
-from application.api.config import config_edit_api, config_query_api
+from application.api.config_api import config_edit_api, config_query_api
 from application.api.download_task import download_task_query,download_task_del, download_task_add, task_start_api
 from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api

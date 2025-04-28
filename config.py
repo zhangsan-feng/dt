@@ -1,6 +1,4 @@
 import os
-import logging
-from logging.handlers import RotatingFileHandler
 from application.entity.config_enetity import config_query_
 
 class Config:

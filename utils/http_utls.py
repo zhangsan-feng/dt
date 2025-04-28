@@ -21,7 +21,7 @@ class HttpRequest:
             except Exception as e:
                 print(f"request error: {e}")
                 raise
-        await __get()
+        return await __get()
 
     async def httpx_post(self, data=None, json=None):
         @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
@@ -32,10 +32,8 @@ class HttpRequest:
             except Exception as e:
                 print(f"request error: {e}")
                 raise
-        await __post()
+        return await __post()
 
-    async def httpx_stream(self):
-        pass
 
     async def aiohttp_get(self, params):
         @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
@@ -46,7 +44,7 @@ class HttpRequest:
             except Exception as e:
                 print(f"request error: {e}")
                 raise
-        await __get()
+        return await __get()
 
     async def aiohttp_post(self, data=None, json=None):
         @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
@@ -57,7 +55,6 @@ class HttpRequest:
             except Exception as e:
                 print(f"request error: {e}")
                 raise
-        await __post()
 
-    async def aiohttp_stream(self):
-        pass
+        return await __post()
+

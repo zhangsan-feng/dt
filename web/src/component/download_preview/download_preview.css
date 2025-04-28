@@ -2,7 +2,7 @@
     /*height: 70vh;*/
     width: 100%;
     overflow: auto;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 
 .preview-container-box{
@@ -14,4 +14,16 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 10px;
     padding: 5px;
+
+}
+
+
+.my-masonry-grid {
+    display: flex;
+    width: auto;
+    overflow: auto;
+}
+.my-masonry-grid_column {
+    padding-left: 8px;
+    background-clip: padding-box;
 }

@@ -4,7 +4,7 @@ import {Col, Image, Row} from 'antd';
 import './download_preview.css'
 import {FilePreviewApi} from '../../api/api'
 import {useState, useEffect, useRef, useCallback, useLayoutEffect} from 'react'
-
+import Masonry from "react-masonry-css";
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
@@ -15,19 +15,29 @@ const LazyVideoPlayer1 = ({ url }) => {
     const ref = useRef();
 
     useEffect(() => {
+        const currentRef = ref.current; // 保存引用，避免闭包问题
+        if (!currentRef) return;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    setTimeout(() => setShouldLoad(true), 300); // 延迟300ms再加载元数据
-                    observer.unobserve(ref.current);
+                    const loadTimer = setTimeout(() => {
+                        setShouldLoad(true);
+                        observer.unobserve(currentRef); // 加载后停止观察
+                    }, 300);
+
+                    return () => clearTimeout(loadTimer); // 清理定时器
                 }
             },
-            { rootMargin: '200px' } // 提前200px触发观察
+            { rootMargin: '200px' }
         );
-        if (ref.current) observer.observe(ref.current);
+
+        observer.observe(currentRef);
+
         return () => {
-            if (ref.current) observer.unobserve(ref.current);
+            observer.unobserve(currentRef);
+            observer.disconnect();
         };
     }, []);
 
@@ -36,8 +46,7 @@ const LazyVideoPlayer1 = ({ url }) => {
 
             {isVisible ? (
                 <ReactPlayer url={url} controls={true} width="100%" height="100%" playing={false}
-                             config={{file: {attributes: {preload: 'metadata'}}}}
-                />
+                             config={{file: {attributes: {preload: 'metadata'}}}}/>
             ) : (
                 <div style={{backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                     Loading...
@@ -53,36 +62,34 @@ const DownloadPreview = ()=>{
     const [page, setPage] = useState(1);
     const containerRef = useRef(null);
     const [hasMore, setHasMore] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
     const debounceTimer = useRef(null);
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 200 : 500;
+        return content ? content.clientHeight - 100 : 500;
     });
     useLayoutEffect(() => {
         const handleResize = () => {
             const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight - 200);}
+            if (content) {setTableHeight(content.clientHeight -100);}
         };
         window.addEventListener('resize', handleResize);
         return () => {window.removeEventListener('resize', handleResize);};
     }, []);
 
 
-    const loadMoreData = useCallback(() => {
-        if (!hasMore || isLoading) return;
-        setIsLoading(true);
+    const loadMoreData = ()=>{
+        if (!hasMore){return}
         FilePreviewApi({ page })
             .then((res) => {
                 setData((prevData) => [...prevData, ...res.data]);
                 setPage((prevPage) => prevPage + 1);
-                if (res.data.length === 0) {
-                    setHasMore(false);
-                }
-            }).finally(() => {setIsLoading(false); setHasMore(false)});
-    }, [hasMore, isLoading, page]);
-    useEffect(() => {if (data.length === 0) {loadMoreData();}}, [data.length, loadMoreData]);
+                if (res.data.length === 0) {setHasMore(false);}
+            })
+    }
+
+    useEffect(() => {loadMoreData()}, []);
+
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
@@ -91,7 +98,8 @@ const DownloadPreview = ()=>{
             if (debounceTimer.current) {clearTimeout(debounceTimer.current);}
             debounceTimer.current = setTimeout(() => {
                 const { scrollTop, scrollHeight, clientHeight } = container;
-                const isAtBottom = scrollHeight - scrollTop <= clientHeight + 10;
+                const isAtBottom = scrollHeight - scrollTop <= clientHeight + 50;
+                console.log(scrollHeight - scrollTop, clientHeight);
                 if (isAtBottom) {loadMoreData();}
             }, 500);
         };
@@ -121,30 +129,44 @@ const DownloadPreview = ()=>{
         return () => clearTimeout(timer);
     }, [renderIndex, data.length]);
 
+    const breakpointColumnsObj = {
+        default: 7,
+        1920:7,
+        1600:6,
+        1300:5,
+        1000:4,
+        700:3,
+        500:2,
+        300:1
+    };
+
     return (
+
         <div className="preview-container"  ref={containerRef} style={{height:tableHeight}}>
-            <div className="preview-container-box">
-                <div className="preview-container-box-resource">
-                        {
-                            data.slice(0, renderIndex).map((items, index) => {
-                                if (items.includes(".png")) {
-                                    return (
-                                        <div key={index}>
-                                            <Image src={items} loading="lazy" />
-                                        </div>
-                                    );
-                                }
-                                if (items.includes(".mp4")) {
-                                    return (
-                                        <div key={index}>
-                                            <LazyVideoPlayer1 url={items} />
-                                        </div>
-                                    );
-                                }
-                            })
-                        }
-                </div>
-            </div>
+            <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+            >
+                    {
+                        data.slice(0, renderIndex).map((items, index) => {
+                            if (items.includes(".png")) {
+                                return (
+                                    <div key={index}>
+                                        <Image src={items} loading="lazy" />
+                                    </div>
+                                );
+                            }
+                            if (items.includes(".mp4")) {
+                                return (
+                                    <div key={index}>
+                                        <LazyVideoPlayer1 url={items} />
+                                    </div>
+                                );
+                            }
+                        })
+                    }
+            </Masonry>
         </div>
     )
 }

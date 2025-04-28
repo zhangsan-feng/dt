@@ -28,9 +28,9 @@ const LocalizedModal = (source) => {
                 width="100%"
                 footer={null}
             >
-                <div className="record-container" >
-                    <div className="record-container-box">
-                        <div className="record-container-box-resource">
+                <div className="preview-container" >
+                    <div className="preview-container-box">
+                        <div className="preview-container-box-resource">
                             {
                                 source.source.files.split(",").map((items, index) => {
                                     if (items.includes(".png")) {

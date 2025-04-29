@@ -18,7 +18,7 @@ class ConfigEntity(SQLModel, table=True):
     update_time:str = Field(sa_column=Column(String))
 
 # print(CreateTable(ConfigEntity.__table__).compile(engine))
-# SQLModel.metadata.create_all(engine)
+SQLModel.metadata.create_all(engine)
 
 current_file_path = os.path.abspath(__file__)
 project_dir = os.path.dirname(current_file_path)

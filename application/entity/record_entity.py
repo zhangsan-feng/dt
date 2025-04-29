@@ -15,7 +15,7 @@ class RecordEntity(SQLModel, table=True):
 
 
 # print(CreateTable(RecordEntity.__table__).compile(engine))
-# SQLModel.metadata.create_all(engine)
+SQLModel.metadata.create_all(engine)
 
 async def record_add(obj):
     with Session(engine) as session:

@@ -6,7 +6,6 @@ import aiohttp
 class HttpRequest:
     def __init__(self, url, headers, proxy=None):
         self.url = url
-
         self.proxy = proxy
         self.headers = headers
         self.max_retries = 3

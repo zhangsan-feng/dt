@@ -22,6 +22,7 @@ async def douyin_data_handler(obj, headers):
 
     config = Config()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
+
     # tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
     # if os.path.exists(tmp_path):os.mkdir(tmp_path)
     # file = tmp_path + word_analysis(author) + "_" + aweme_id + "_"

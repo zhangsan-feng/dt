@@ -35,6 +35,8 @@ async def download_flv_stream(link, file_name, headers):
             async with httpx.AsyncClient(headers=headers, follow_redirects=True, timeout=None) as client:
                 async with client.stream("GET", url=url) as response:
                     response.raise_for_status()
+                    # if not response.is_successful():
+                    #     return
                     with open(save_path, "wb") as f:
                         async for chunk in response.aiter_bytes():
                             f.write(chunk)

@@ -99,7 +99,6 @@ const DownloadPreview = ()=>{
             debounceTimer.current = setTimeout(() => {
                 const { scrollTop, scrollHeight, clientHeight } = container;
                 const isAtBottom = scrollHeight - scrollTop <= clientHeight + 50;
-                console.log(scrollHeight - scrollTop, clientHeight);
                 if (isAtBottom) {loadMoreData();}
             }, 500);
         };

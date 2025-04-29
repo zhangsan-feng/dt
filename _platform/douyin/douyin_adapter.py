@@ -56,6 +56,10 @@ async def douyin_adapter(link, user_agent):
         sec_user_id = link.replace("https://www.douyin.com/user/","").split("?")[0].replace("/", "")
         return await douyin_post(sec_user_id, user_agent, cookie)
 
+    if "iesdouyin.com/share/user/" in link:
+        sec_user_id = link.replace("https://www.iesdouyin.com/share/user/","").split("?")[0].replace("/", "")
+        return await douyin_post(sec_user_id, user_agent, cookie)
+
     if "live.douyin.com" in link or "webcast.amemv.com" in link:
         await douyin_live(link, cookie, user_agent)
 

@@ -22,11 +22,7 @@ const LocalizedModal = (source) => {
             <Button type="primary" onClick={showModal}>预览</Button>
             <Modal
                 title={`${source.source.author}-${source.source.desc}`}
-                open={open}
-                onOk={hideModal}
-                onCancel={hideModal}
-                width="100%"
-                footer={null}
+                open={open} onOk={hideModal} onCancel={hideModal} width="100%" footer={null}
             >
                 <div className="preview-container" >
                     <div className="preview-container-box">
@@ -67,23 +63,25 @@ const DownloadRecord = ()=>{
         window.addEventListener('resize', handleResize);
         return () => {window.removeEventListener('resize', handleResize);};
     }, []);
-    setTimeout(()=>{DownLoadRecordQueryApi().then(res=>{setData(res)})}, 3000)
-    useEffect(()=>{DownLoadRecordQueryApi().then(res => setData(res));}, [])
-    
 
+    useEffect(() => {
+        DownLoadRecordQueryApi().then(res => setData(res));
+        const intervalId = setInterval(() => {DownLoadRecordQueryApi().then(res => setData(res));}, 3000);
+        return () => {clearInterval(intervalId);};
+    }, []);
 
     const columns = [
-        {title: 'id', dataIndex: 'id', key: 'id', width: 100},
-        {title: '作者', dataIndex: 'author', key: 'author',ellipsis:true},
+        {title: 'id', dataIndex: 'id', key: 'id', width: 80,ellipsis:true},
+        {title: '作者', dataIndex: 'author', key: 'author', width: "10%",ellipsis:true},
         {title: '作者id', dataIndex: 'author_id', key: 'author_id',ellipsis:true},
         {title: '文案', key: 'desc', dataIndex: 'desc',ellipsis:true},
-        {title: '', key: '', dataIndex: '', width:100, render: (text, source) => {
+        {title: '', key: '', dataIndex: '', width:80, render: (text, source) => {
                 return <Button onClick={()=>{
                     DownLoadRecordDeleteApi({"id":source.id}).then(res=>{})
                 }}> 删除</Button>
             }
         },
-        {title: '', key: '', width:100, render: (_, source) => (
+        {title: '', key: '', width:80, render: (_, source) => (
                 <Space size="middle">
                     <LocalizedModal source={source}/>
                 </Space>

@@ -1,4 +1,4 @@
-from application.entity.record_entity import record_add
+from application.entity.download_record_entity import record_add
 from config import Config
 from utils import word_analysis, gen_uid
 from utils.download import download_flv_stream

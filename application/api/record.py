@@ -1,4 +1,4 @@
-from application.entity.record_entity import record_query, record_delete
+from application.entity.download_record_entity import record_query, record_delete
 from fastapi import Request
 
 async def record_query_api():

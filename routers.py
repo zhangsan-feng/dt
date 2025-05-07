@@ -1,11 +1,10 @@
 from fastapi import Request
 from fastapi import APIRouter
 from application.api.config_api import config_edit_api, config_query_api
-from application.api.download_task import download_task_query,download_task_del, download_task_add, task_start_api
+from application.api.download_batch import download_batch_query,download_batch_del, download_batch_add, batch_start_api
 from application.api.file_obj import file_object_stream
 from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api
-from application.api.download_batch import download_batch_adapter
 from application.api.record import record_query_api, record_delete_api
 
 api_router = APIRouter()
@@ -42,10 +41,6 @@ async def preview(request: Request):
 @api_router.post("/link_analysis")
 async def link_analysis(request: Request):
     return await link_analysis_api(request)
-
-@api_router.post("/download_batch")
-async def download_batch(request: Request):
-    return await download_batch_adapter(request)
 
 @api_router.get("/download_record_query")
 async def record_query():

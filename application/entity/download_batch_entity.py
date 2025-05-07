@@ -5,7 +5,7 @@ from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column
 from application.entity import engine
 
-class DownLoadTaskEntity(SQLModel, table=True):
+class DownLoadBatchEntity(SQLModel, table=True):
     __tablename__ = "download_task"
     id: int = Field(default=None, sa_column=Column(Integer, primary_key=True, autoincrement=True))
     link: str = Field(sa_column=Column(String))
@@ -15,13 +15,13 @@ class DownLoadTaskEntity(SQLModel, table=True):
     platform: str = Field(sa_column=Column(String))
     update_time: str = Field(sa_column=Column(String))
 
-# print(CreateTable(DownLoadTaskEntity.__table__).compile(engine))
+# print(CreateTable(DownLoadBatchEntity.__table__).compile(engine))
 SQLModel.metadata.create_all(engine)
 
 
-async def task_update(user_id, status, author, platform):
+async def batch_update(user_id, status, author, platform):
     with Session(engine) as session:
-        model = session.exec(select(DownLoadTaskEntity).where(DownLoadTaskEntity.id == id)).first()
+        model = session.exec(select(DownLoadBatchEntity).where(DownLoadBatchEntity.id == id)).first()
         if model:
             model.author = author
             model.user_id = user_id
@@ -32,20 +32,20 @@ async def task_update(user_id, status, author, platform):
             session.commit()
 
 
-async def task_delete(id):
+async def batch_delete(id):
     with Session(engine) as session:
-        task = session.get(DownLoadTaskEntity, id)
+        task = session.get(DownLoadBatchEntity, id)
         if task:
             session.delete(task)
             session.commit()
 
 
-async def task_add(link):
+async def batch_add(link):
     with Session(engine) as session:
-        existing_task = session.exec(select(DownLoadTaskEntity).where(DownLoadTaskEntity.link == link)).first()
+        existing_task = session.exec(select(DownLoadBatchEntity).where(DownLoadBatchEntity.link == link)).first()
         if not existing_task:
 
-            download_task = DownLoadTaskEntity(
+            download_task = DownLoadBatchEntity(
                 link=link,
                 author="NULL" ,
                 user_id="NULL",
@@ -59,8 +59,8 @@ async def task_add(link):
             session.refresh(download_task)
 
 
-async def task_query():
+async def batch_query():
     with Session(engine) as session:
-        statement = select(DownLoadTaskEntity)
+        statement = select(DownLoadBatchEntity)
         results = session.exec(statement).all()
         return results

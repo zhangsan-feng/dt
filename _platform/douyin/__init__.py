@@ -3,7 +3,7 @@ import os
 from utils import word_analysis, max_index, gen_uid
 from utils.download import download_file, download_flv_stream
 from config import Config
-from application.entity.record_entity import record_add
+from application.entity.download_record_entity import record_add
 
 
 def author_path(author):

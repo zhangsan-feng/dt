@@ -6,16 +6,14 @@ import { Button, Modal, Image } from 'antd';
 import ReactPlayer from "react-player";
 import './download_record.css'
 
-
 const LocalizedModal = (source) => {
     const [open, setOpen] = useState(false);
+    const [buffered, setBuffered] = useState(0);
 
-    const showModal = () => {
-        setOpen(true);
-    };
-    const hideModal = () => {
-        setOpen(false);
-    };
+    const onProgress = (state) => {setBuffered(state.loadedSeconds / state.duration * 100);};
+
+    const showModal = () => {setOpen(true);};
+    const hideModal = () => {setOpen(false);};
     // console.log(source.source.files)
     return (
         <>
@@ -24,19 +22,17 @@ const LocalizedModal = (source) => {
                 title={`${source.source.author}-${source.source.desc}`}
                 open={open} onOk={hideModal} onCancel={hideModal} width="100%" footer={null}
             >
-                <div className="preview-container" >
-                    <div className="preview-container-box">
-                        <div className="preview-container-box-resource">
+                <div className="record-container" >
+                    <div className="record-container-box">
+                        <div className="record-container-box-resource">
                             {
                                 source.source.files.split(",").map((items, index) => {
                                     if (items.includes(".png")) {
                                         return <Image key={index} src={items}></Image>
-                                    }else if (items.includes(".mp4")) {
-                                        return <ReactPlayer url={items} controls={true} width="100%" height="100%" playing={false}
-                                                            config={{file: {attributes: {preload: 'metadata'}}}}/>
+                                    }else if (items.includes(".mp4") || items.includes(".flv") || items.includes(".mp3")) {
+                                        return <ReactPlayer url={items} controls={true} width="100%" height="100%" onProgress={onProgress}/>
 
-                                    }else if (items.includes(".mp3")) {
-                                        return <audio src={items} controls></audio>
+
                                     }
                                 })
                             }
@@ -72,6 +68,7 @@ const DownloadRecord = ()=>{
 
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id', width: 80,ellipsis:true},
+        {title: '作品id', dataIndex: 'aweme_id', key: 'aweme_id', width: 200,ellipsis:true},
         {title: '作者', dataIndex: 'author', key: 'author', width: "10%",ellipsis:true},
         {title: '作者id', dataIndex: 'author_id', key: 'author_id',ellipsis:true},
         {title: '文案', key: 'desc', dataIndex: 'desc',ellipsis:true},

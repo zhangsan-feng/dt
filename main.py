@@ -24,6 +24,8 @@ app.mount(
 app.include_router(api_router, prefix="/api")
 
 if __name__ == '__main__':
+
+    
     # os.remove("./store.duckdb")
     # from application.db import DuckDBConfigure
     # DuckDBConfigure().init_duckdb()

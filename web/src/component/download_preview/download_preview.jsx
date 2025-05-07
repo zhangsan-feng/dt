@@ -1,12 +1,10 @@
 
 import ReactPlayer from 'react-player';
-import {Col, Image, Row} from 'antd';
+import {Image} from 'antd';
 import './download_preview.css'
 import {FilePreviewApi} from '../../api/api'
-import {useState, useEffect, useRef, useCallback, useLayoutEffect} from 'react'
+import {useState, useEffect, useRef, useLayoutEffect} from 'react'
 import Masonry from "react-masonry-css";
-import videojs from 'video.js';
-import 'video.js/dist/video-js.css';
 
 
 const LazyVideoPlayer1 = ({ url }) => {
@@ -24,10 +22,10 @@ const LazyVideoPlayer1 = ({ url }) => {
                     setIsVisible(true);
                     const loadTimer = setTimeout(() => {
                         setShouldLoad(true);
-                        observer.unobserve(currentRef); // 加载后停止观察
+                        observer.unobserve(currentRef);
                     }, 300);
 
-                    return () => clearTimeout(loadTimer); // 清理定时器
+                    return () => clearTimeout(loadTimer);
                 }
             },
             { rootMargin: '200px' }
@@ -43,10 +41,8 @@ const LazyVideoPlayer1 = ({ url }) => {
 
     return (
         <div ref={ref} style={{ width: '100%', height: '100%', minHeight: '200px' }}>
-
             {isVisible ? (
-                <ReactPlayer url={url} controls={true} width="100%" height="100%" playing={false}
-                             config={{file: {attributes: {preload: 'metadata'}}}}/>
+                <ReactPlayer url={url} controls={true} width="100%" height="100%" />
             ) : (
                 <div style={{backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                     Loading...
@@ -144,8 +140,8 @@ const DownloadPreview = ()=>{
         <div className="preview-container"  ref={containerRef} style={{height:tableHeight}}>
             <Masonry
                 breakpointCols={breakpointColumnsObj}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
+                className="masonry-grid"
+                columnClassName="masonry-grid_column"
             >
                     {
                         data.slice(0, renderIndex).map((items, index) => {
@@ -156,7 +152,7 @@ const DownloadPreview = ()=>{
                                     </div>
                                 );
                             }
-                            if (items.includes(".mp4")) {
+                            if ((items.includes(".mp4") || items.includes(".flv"))) {
                                 return (
                                     <div key={index}>
                                         <LazyVideoPlayer1 url={items} />

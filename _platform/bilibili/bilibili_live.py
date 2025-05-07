@@ -1,5 +1,8 @@
 import asyncio
 
+from _platform.bilibili import bilibili_live_handler
+from utils import word_analysis, gen_uid
+from utils.http_utls import HttpRequest
 
 async def bilibili_live(link, user_agent):
     headers = {
@@ -20,39 +23,42 @@ async def bilibili_live(link, user_agent):
     }
 
 
-    # room_id =  url.split("?")[0].replace("https://live.bilibili.com/","")
+    room_id =  link.split("?")[0].replace("https://live.bilibili.com/","")
 
-    # params = {
-    #     "room_id":room_id,
-    #     "mask":"1",
-    #     "qn":"0",
-    #     "platform":"web",
-    #     "protocol":"0,1",
-    #     "format":"0,1,2",
-    #     "codec":"0,1,2",
-    #     "dolby":"5",
-    #     "panorama":"1",
-    # }
-
+    params = {
+        "room_id":room_id,
+        "mask":"1",
+        "qn":"0",
+        "platform":"web",
+        "protocol":"0,1",
+        "format":"0,1,2",
+        "codec":"0,1,2",
+        "dolby":"5",
+        "panorama":"1",
+    }
     url = "https://api.live.bilibili.com/xlive/web-room/v2/index/getRoomPlayInfo"
+    response = await HttpRequest(url, headers).httpx_get(params)
+    response_body = response.json()
+    # print(response_body)
 
-    # console.log(response_body)
-    # const info = response_body['data']["playurl_info"]["playurl"]["stream"][0]["format"][0]["codec"][0]
-    # const uids = response_body['data']["uid"].toString()
-    # const flv_stream_url = info["url_info"][0]["host"] + info["base_url"] + info["url_info"][0]["extra"]
+    info = response_body['data']["playurl_info"]["playurl"]["stream"][0]["format"][0]["codec"][0]
+    uids = response_body['data']["uid"]
+    flv_stream_url = info["url_info"][0]["host"] + info["base_url"] + info["url_info"][0]["extra"]
 
+    params = {
+        "uids":uids,
+        "req_biz":"video"
+    }
+    url = "https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomBaseInfo"
 
-    # params = {
-    #     "uids":uids,
-    #     "req_biz":"video"
-    # }
-    # url = "https://api.live.bilibili.com/xlive/web-room/v1/index/getRoomBaseInfo"
+    response = await HttpRequest(url, headers).httpx_get(params)
+    response_body = response.json()
+    # print(response_body)
 
-
-    # author = word_analysis(response_body['data']["by_uids"][uids]["uname"])
-    # title = word_analysis(response_body['data']["by_uids"][uids]["title"])
-    # flv_file_name = nickname + '_' + GetTime()+ ".flv"
-
+    author = word_analysis(response_body['data']["by_uids"][str(uids)]["uname"])
+    title = word_analysis(response_body['data']["by_uids"][str(uids)]["title"])
+    headers['referer'] = flv_stream_url
+    await bilibili_live_handler(author, title, flv_stream_url, headers)
 
 
 
@@ -64,6 +70,7 @@ async def bilibili_live(link, user_agent):
 if __name__ == '__main__':
     asyncio.run(
         bilibili_live(
-
+            "",
+            ""
         )
     )

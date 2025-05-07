@@ -1,8 +1,8 @@
 from fastapi import Request
 from fastapi import APIRouter
-
 from application.api.config_api import config_edit_api, config_query_api
 from application.api.download_task import download_task_query,download_task_del, download_task_add, task_start_api
+from application.api.file_obj import file_object_stream
 from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api
 from application.api.download_batch import download_batch_adapter
@@ -19,21 +19,21 @@ async def config_edit(request: Request):
 async def config_query():
     return await config_query_api()
 
-@api_router.get("/task_query")
-async def task_query():
-    return await download_task_query()
+@api_router.get("/download_batch_query")
+async def download_batch_query():
+    return {"code":200, "data":[], "msg":""}
 
-@api_router.post("/task_del")
-async def task_del(request: Request):
-    return await download_task_del(request)
+@api_router.post("/download_batch_del")
+async def download_batch_del(request: Request):
+    return {"code": 200, "data": [], "msg": ""}
 
-@api_router.post("/task_add")
-async def task_add(request: Request):
-    return await download_task_add(request)
+@api_router.post("/download_batch_add")
+async def download_batch_add(request: Request):
+     return {"code":200, "data":[], "msg":""}
 
-@api_router.get("/task_start")
-async def task_start():
-    await task_start_api()
+@api_router.get("/download_batch_start")
+async def download_batch_start():
+     return {"code":200, "data":[], "msg":""}
 
 @api_router.get("/preview")
 async def preview(request: Request):
@@ -47,10 +47,11 @@ async def link_analysis(request: Request):
 async def download_batch(request: Request):
     return await download_batch_adapter(request)
 
-@api_router.get("/record_query")
+@api_router.get("/download_record_query")
 async def record_query():
     return await record_query_api()
 
-@api_router.post("/record_delete")
+@api_router.post("/download_record_delete")
 async def record_delete(request: Request):
     return await record_delete_api(request)
+

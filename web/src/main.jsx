@@ -11,3 +11,6 @@ if (!rootElement) {
 ReactDOM.createRoot(rootElement).render(
     <RouterProvider router={httpRouter} />
 );
+
+
+// https://animejs.com/documentation/animation

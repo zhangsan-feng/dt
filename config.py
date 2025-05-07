@@ -10,6 +10,10 @@ class Config:
         self.douyin_cookie: str = config_.douyin_cookie
         self.douyin_path = self.save_path + "/douyin/"
         if not os.path.exists(self.douyin_path): os.makedirs(self.douyin_path)
+
+        self.bilibili_path = self.save_path + "/bilibili/"
+        if not os.path.exists(self.bilibili_path): os.makedirs(self.bilibili_path)
+
         self.proxy: str = config_.proxy
         self.update_time: str = config_.update_time
 

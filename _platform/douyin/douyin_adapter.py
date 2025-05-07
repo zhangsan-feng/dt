@@ -70,6 +70,10 @@ async def douyin_adapter(link, user_agent):
     if "https://www.douyin.com/user/self?from_tab_name=main&showTab=favorite_collection" in link:
         pass
 
+    pass
+
+
+
 if __name__ == '__main__':
     asyncio.run(
         douyin_adapter(

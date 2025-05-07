@@ -49,7 +49,10 @@ def config_edit_(obj):
     with Session(engine) as session:
         model = session.exec(select(ConfigEntity).where(ConfigEntity.id == 1)).first()
         if not "download" in obj["save_path"]:
-            obj["save_path"] = obj["save_path"] + "/download/"
+            if obj["save_path"][-1] == "/":
+                obj["save_path"] = obj["save_path"] + "download/"
+            else:
+                obj["save_path"] = obj["save_path"] + "/download/"
 
         if model:
             model.save_path = obj["save_path"]

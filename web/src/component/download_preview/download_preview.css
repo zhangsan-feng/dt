@@ -1,3 +1,4 @@
+
 .preview-container {
     /*height: 70vh;*/
     width: 100%;
@@ -17,13 +18,12 @@
 
 }
 
-
-.my-masonry-grid {
+.masonry-grid {
     display: flex;
     width: auto;
     overflow: auto;
 }
-.my-masonry-grid_column {
+.masonry-grid_column {
     padding-left: 8px;
     background-clip: padding-box;
 }

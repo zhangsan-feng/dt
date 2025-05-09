@@ -7,6 +7,7 @@ from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api
 from application.api.process import process_status, process_kill
 from application.api.record import record_query_api, record_delete_api
+from application.service.process_manager import kill_all
 
 api_router = APIRouter()
 
@@ -62,3 +63,7 @@ async def download_manger_query():
 @api_router.post("/download_manger_kill")
 async def download_manger_kill(request: Request):
     return await process_kill(request)
+
+@api_router.post("/download_manger_kill_all")
+async def download_manger_kill_all(request: Request):
+    await kill_all()

@@ -6,12 +6,7 @@ from config import Config
 from application.entity.download_record_entity import record_add
 
 
-def author_path(author):
 
-    # tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
-    # if os.path.exists(tmp_path):os.mkdir(tmp_path)
-
-    pass
 
 
 async def douyin_data_handler(obj, headers):
@@ -25,12 +20,14 @@ async def douyin_data_handler(obj, headers):
     author        = obj["author"]["nickname"]
     image_link    = obj["images"] if "images" in obj else None
     music_link    = obj["music"] if "music" in obj else None
-    audio_link    = obj["music"] if obj["music"] else None
     desc          = obj["desc"]
 
 
     config = Config()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
+
+    # tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
+    # if os.path.exists(tmp_path):os.mkdir(tmp_path)
 
     file = config.douyin_path + word_analysis(author) + "_" + aweme_id + "_"
 
@@ -67,8 +64,6 @@ async def douyin_data_handler(obj, headers):
         await download_stream(music_url, music_file, headers)
         record_obj["files"].append(config.resource_path + music_file.replace(config.save_path, ""))
 
-    if audio_link:
-        pass
 
     record_obj["files"] = ",".join(record_obj["files"])
     await record_add(record_obj)

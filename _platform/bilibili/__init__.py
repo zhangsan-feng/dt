@@ -34,8 +34,8 @@ async def bilibili_data_handler(obj, author, title, aweme_id, author_id, headers
     await download_stream(video_url, video_file, headers)
 
     command = [
-        "ffmpeg", "-y", "-i", video_file, "-i", audio_file, "-c:v", "copy", "-c:a", "aac", "-strict", "experimental",
-        "-map", "0:v:0", "-map", "1:a:0", "-shortest", merge_file
+        "ffmpeg", "-y", "-i", video_file, "-i", audio_file, "-c:v", "copy", "-c:a", "aac", "-strict",
+        "experimental", "-map", "0:v:0", "-map", "1:a:0", "-shortest", merge_file
     ]
     subprocess.run(command, check=True)
 

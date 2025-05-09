@@ -8,6 +8,7 @@ async def func(uuid):
         print(f"running uuid{uuid} i:{i}")
         await asyncio.sleep(1)
 
+
 async def create(fn, uuid, link):
     async with lock:
         if uuid in M and M[uuid]["pid"].done():
@@ -37,6 +38,15 @@ async def kill(uuid):
         if not M[uuid]["pid"].done():
             M[uuid]["pid"].cancel()
             M[uuid]["status"] = "暂停"
+
+
+async def kill_all():
+    async with lock:
+        for uuid, ptr in M.items():
+            if not M[uuid]["pid"].done():
+                M[uuid]["pid"].cancel()
+                M[uuid]["status"] = "暂停"
+
 
 async def edit(uuid):
     async with lock:

@@ -1,10 +1,11 @@
 from fastapi import Request
 from fastapi import APIRouter
 from application.api.config_api import config_edit_api, config_query_api
-from application.api.download_batch import download_batch_query,download_batch_del, download_batch_add, batch_start_api
+from application.api.download_batch import download_batch_query_api,download_batch_del_api, download_batch_add_api, download_batch_start_api
 from application.api.file_obj import file_object_stream
 from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api
+from application.api.process import process_status, process_kill
 from application.api.record import record_query_api, record_delete_api
 
 api_router = APIRouter()
@@ -19,20 +20,24 @@ async def config_query():
     return await config_query_api()
 
 @api_router.get("/download_batch_query")
-async def download_batch_query():
-    return {"code":200, "data":[], "msg":""}
+async def download_batch_query(request: Request):
+    return await download_batch_query_api(request)
+
+@api_router.post("/download_batch_start")
+async def download_batch_start(request: Request):
+    return await download_batch_start_api(request)
 
 @api_router.post("/download_batch_del")
 async def download_batch_del(request: Request):
-    return {"code": 200, "data": [], "msg": ""}
+    return await download_batch_del_api(request)
 
 @api_router.post("/download_batch_add")
 async def download_batch_add(request: Request):
-     return {"code":200, "data":[], "msg":""}
+     return await download_batch_add_api(request)
 
-@api_router.get("/download_batch_start")
-async def download_batch_start():
-     return {"code":200, "data":[], "msg":""}
+@api_router.post("/download_batch_start")
+async def download_batch_start(request: Request):
+     return await download_batch_start_api(request)
 
 @api_router.get("/preview")
 async def preview(request: Request):
@@ -43,10 +48,17 @@ async def link_analysis(request: Request):
     return await link_analysis_api(request)
 
 @api_router.get("/download_record_query")
-async def record_query():
-    return await record_query_api()
+async def record_query(request: Request):
+    return await record_query_api(request)
 
 @api_router.post("/download_record_delete")
 async def record_delete(request: Request):
     return await record_delete_api(request)
 
+@api_router.get("/download_manger_query")
+async def download_manger_query():
+    return await process_status()
+
+@api_router.post("/download_manger_kill")
+async def download_manger_kill(request: Request):
+    return await process_kill(request)

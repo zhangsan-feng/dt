@@ -6,7 +6,7 @@ import DownloadRecord from "./component/download_record/download_record.jsx";
 import DownloadSettings from "./component/download_settings/download_settings.jsx";
 import DownloadWork from "./component/download_work/download_work.jsx";
 import OtherFunction from "./component/other_function/other_function.jsx";
-
+import DownLoadManager from "./component/download_manager/download_manager";
 
 const routes = [
   {
@@ -32,6 +32,10 @@ const routes = [
       {
         path:"/download_preview",
         element:<DownloadPreview/>
+      },
+      {
+        path:"/download_manager",
+        element:<DownLoadManager/>
       },
       {
         path:"/other_function",

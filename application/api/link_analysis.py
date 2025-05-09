@@ -1,9 +1,9 @@
-from fastapi import Request
 
-from _platform.bilibili.bilibili_adapter import bilibili_adapter
-from _platform.douyin.douyin_adapter import douyin_adapter
+
+from fastapi import Request
 from utils import match_url
 from utils.logger import logger
+from application.service.link_analysis import link_analysis
 
 
 async def link_analysis_api(request: Request):
@@ -13,13 +13,8 @@ async def link_analysis_api(request: Request):
     link = match_url(link)
     logger.info(link)
     user_agent = dict(request.headers)["user-agent"]
-    try:
-        if "douyin" in link:
-            await douyin_adapter(link, user_agent)
-        if "bilibili" in link:
-            await bilibili_adapter(link, user_agent)
-    except Exception as e:
 
-        return {"code":200, "data":"error", "msg":""}
+    await link_analysis(link, user_agent)
 
-    return {"code":200, "data":"success", "msg":""}
+
+    return {"code":200, "data":"已经加入下载队列", "msg":""}

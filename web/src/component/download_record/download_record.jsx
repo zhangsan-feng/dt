@@ -8,9 +8,6 @@ import './download_record.css'
 
 const LocalizedModal = (source) => {
     const [open, setOpen] = useState(false);
-    const [buffered, setBuffered] = useState(0);
-
-    const onProgress = (state) => {setBuffered(state.loadedSeconds / state.duration * 100);};
 
     const showModal = () => {setOpen(true);};
     const hideModal = () => {setOpen(false);};
@@ -30,9 +27,7 @@ const LocalizedModal = (source) => {
                                     if (items.includes(".png")) {
                                         return <Image key={index} src={items}></Image>
                                     }else if (items.includes(".mp4") || items.includes(".flv") || items.includes(".mp3")) {
-                                        return <ReactPlayer url={items} controls={true} width="100%" height="100%" onProgress={onProgress}/>
-
-
+                                        return <ReactPlayer url={items} controls={true} width="100%" height="100%"/>
                                     }
                                 })
                             }
@@ -47,6 +42,10 @@ const LocalizedModal = (source) => {
 
 const DownloadRecord = ()=>{
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageTotal, setPageTotal] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
         return content ? content.clientHeight - 200 : 500;
@@ -60,11 +59,24 @@ const DownloadRecord = ()=>{
         return () => {window.removeEventListener('resize', handleResize);};
     }, []);
 
+    const QueryData = (page=currentPage)=>{
+        if (!hasMore) {return}
+        DownLoadRecordQueryApi({"page":page}).then(res => {
+            if (res.length === 0){setHasMore(false)}
+            setData(res);
+            setPageTotal(res.length + 1);
+        });
+    }
+
+    const currentPageRef = useRef(currentPage);
+    useEffect(() => {currentPageRef.current = currentPage;}, [currentPage]);
     useEffect(() => {
-        DownLoadRecordQueryApi().then(res => setData(res));
-        const intervalId = setInterval(() => {DownLoadRecordQueryApi().then(res => setData(res));}, 3000);
-        return () => {clearInterval(intervalId);};
+        QueryData();
+        const intervalId = setInterval(() => {QueryData(currentPageRef.current);}, 3000);
+        return () => clearInterval(intervalId);
     }, []);
+
+    const tableChangeHandler = (value)=> {setCurrentPage(value.current)}
 
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id', width: 80,ellipsis:true},
@@ -91,7 +103,13 @@ const DownloadRecord = ()=>{
         <div>
             {
                 data.length !== 0 ?
-                    <Table dataSource={data} columns={columns} rowKey="id" scroll={{y: tableHeight}} pagination={{pageSize:500}}/>
+                    <Table dataSource={data}
+                           columns={columns}
+                           rowKey="id"
+                           scroll={{y: tableHeight}}
+                           pagination={{pageSize:100, total:pageTotal}}
+                           onChange={tableChangeHandler}
+                    />
                     : <div></div>
             }
         </div>

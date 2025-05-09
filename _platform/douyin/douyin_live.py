@@ -74,7 +74,6 @@ async def douyin_live(link, cookie, user_agent):
         'accept': 'application/json, text/plain, */*',
         'accept-language': 'zh-CN,zh;q=0.9',
         'cache-control': 'no-cache',
-        'cookie': cookie,
         'pragma': 'no-cache',
         'priority': 'u=1, i',
         'referer': link,
@@ -85,6 +84,7 @@ async def douyin_live(link, cookie, user_agent):
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-site',
         'user-agent': user_agent,
+        'cookie': cookie,
     }
 
     if "live.douyin.com" in link:

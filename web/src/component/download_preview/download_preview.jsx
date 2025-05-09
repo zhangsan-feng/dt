@@ -80,7 +80,8 @@ const DownloadPreview = ()=>{
             .then((res) => {
                 setData((prevData) => [...prevData, ...res.data]);
                 setPage((prevPage) => prevPage + 1);
-                if (res.data.length === 0) {setHasMore(false);}
+                if (res.data.length === 0) {setHasMore(false);
+                }
             })
     }
 

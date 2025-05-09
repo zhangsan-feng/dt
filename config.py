@@ -14,6 +14,15 @@ class Config:
         self.bilibili_path = self.save_path + "/bilibili/"
         if not os.path.exists(self.bilibili_path): os.makedirs(self.bilibili_path)
 
+        # self.hongshu_path = self.save_path + "/hongshu/"
+        # if not os.path.exists(self.hongshu_path): os.makedirs(self.hongshu_path)
+        #
+        # self.weibo_path = self.save_path + "/weibo/"
+        # if not os.path.exists(self.weibo_path): os.makedirs(self.weibo_path)
+        #
+        # self.kuaishou_path = self.save_path + "/kuaishou/"
+        # if not os.path.exists(self.kuaishou_path): os.makedirs(self.kuaishou_path)
+
         self.proxy: str = config_.proxy
         self.update_time: str = config_.update_time
 

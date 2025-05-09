@@ -5,7 +5,6 @@ from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column, Text
 from application.entity import engine
-from application.db import DuckDBConfigure
 
 
 class ConfigEntity(SQLModel, table=True):
@@ -14,6 +13,10 @@ class ConfigEntity(SQLModel, table=True):
     project_path: str = Field(default=None, sa_column=Column(String))
     save_path: str = Field(default=None, sa_column=Column(String))
     douyin_cookie: str = Field(sa_column=Column(Text))
+    bilibili_cookie: str = Field(sa_column=Column(Text))
+    hongshu_cookie: str = Field(sa_column=Column(Text))
+    weibo_cookie: str = Field(sa_column=Column(Text))
+    kuaishou_cookie: str = Field(sa_column=Column(Text))
     proxy: str = Field(sa_column=Column(String))
     update_time:str = Field(sa_column=Column(String))
 
@@ -34,8 +37,6 @@ with Session(engine) as session:
             value = ConfigEntity(
                 project_path = project_dir,
                 save_path = project_dir + "/download/",
-                douyin_cookie = "NULL",
-                proxy = "NULL",
                 update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             )
 
@@ -56,7 +57,11 @@ def config_edit_(obj):
 
         if model:
             model.save_path = obj["save_path"]
-            model.douyin_cookie = obj["douyin_cookie"]
+            model.douyin_cookie = obj["douyin_cookie"] if "douyin_cookie" in obj else ""
+            model.bilibili_cookie = obj["bilibili_cookie"] if "bilibili_cookie" in obj else ""
+            model.hongshu_cookie = obj["hongshu_cookie"] if "hongshu_cookie" in obj else ""
+            model.weibo_cookie = obj["weibo_cookie"] if "weibo_cookie" in obj else ""
+            model.kuaishou_cookie = obj["kuaishou_cookie"] if "kuaishou_cookie" in obj else ""
             model.proxy = obj["proxy"]
             model.update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             session.add(model)

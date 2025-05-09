@@ -68,6 +68,11 @@ async def bilibili_live(link, user_agent):
 
 
 if __name__ == '__main__':
+
+    """
+    https://live.bilibili.com/26649682?session_id=0805aaeb4a5ac3533fd6741537681db0_2888BFF1-9E46-4343-AA58-42AC5B3E5090&launch_id=1000000&live_from=71001
+    """
+
     asyncio.run(
         bilibili_live(
             "",

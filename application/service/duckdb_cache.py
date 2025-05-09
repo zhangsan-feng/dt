@@ -1,3 +1,4 @@
+import hashlib
 
 import duckdb
 
@@ -58,7 +59,6 @@ class DuckDBConfigure:
                 id INTEGER PRIMARY KEY DEFAULT nextval('download_record_id_seq'),
             );
             """)
-            self.connection.commit()
             self.close_connection()
 
         except Exception as e:
@@ -82,6 +82,7 @@ class DuckDBConfigure:
     def exec(self, sql):
         self.init_connection()
         res = self.connection.execute(sql).fetchall()
-        self.connection.commit()
         self.close_connection()
         return res
+
+

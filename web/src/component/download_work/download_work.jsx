@@ -1,7 +1,7 @@
 
-import {Input, Button, Form, Select} from 'antd';
+import {Input, Button, Form, Select, message} from 'antd';
 import React from 'react';
-import {DouYinAnalysisApi,} from "../../api/api";
+import {LinkAnalysisApi,} from "../../api/api";
 
 
 
@@ -9,8 +9,9 @@ import {DouYinAnalysisApi,} from "../../api/api";
 const DownloadWork = ()=>{
     const [form] = Form.useForm();
     const onFinish = ( values ) => {
-        DouYinAnalysisApi(values).then(res=>{
+        LinkAnalysisApi(values).then(res=>{
             console.log(res)
+            message.warning({content:res.data})
         })
     };
 

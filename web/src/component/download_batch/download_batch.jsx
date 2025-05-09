@@ -1,14 +1,17 @@
 import {Input, Table, message, Button, Tag} from 'antd';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react'
-import {DownLoadTaskAddApi, DownLoadTaskDelApi, DownLoadTaskApi} from '../../api/api'
+import {DownLoadBatchAddApi, DownLoadBatchDelApi, DownLoadBatchQueryApi, DownLoadBatchStartApi} from '../../api/api'
 
 
 const { Search } = Input;
 
 
 const DownloadBatch = ()=>{
-    const [editState, setEditState] = useState(false);
+
     const [dataSource, setDataSource] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageTotal, setPageTotal] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
@@ -23,23 +26,18 @@ const DownloadBatch = ()=>{
         return () => {window.removeEventListener('resize', handleResize);};
     }, []);
 
-    const Submit = (value)=>{
-        // console.log(value)
-        DownLoadTaskAddApi({"link":value}).then(res=>{
-            setEditState(true);
-            message.warning({content: res.data}).then()
+    const QueryData = (page=currentPage)=>{
+        if (!hasMore) {return}
+        DownLoadBatchQueryApi({"page":page}).then(res=>{
+            if (res.data.length === 0){setHasMore(false)}
+            setDataSource(res.data);
+            setPageTotal(res.data.length + 1);
         })
     }
+    const Submit = (value)=>{DownLoadBatchAddApi({"link":value}).then(res=>{message.warning({content: res.data}).then();QueryData()})}
+    useEffect(() => {QueryData()}, []);
 
-    useEffect(() => {
-        DownLoadTaskApi().then(res=>{
-            // console.log(res.data)
-            setEditState(false);
-            setDataSource(res.data)
-        })
-    }, [editState]);
-
-
+    const tableChangeHandler = (value)=> {setCurrentPage(value.current);QueryData(value.current)}
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id'},
         {title: '链接', dataIndex: 'link', key: 'link'},
@@ -56,9 +54,9 @@ const DownloadBatch = ()=>{
         {width:150, render: (_, source)=>{
             if(source !== 1){
                 return <Button color="pink"  variant="solid" onClick={()=>{
-                    DownLoadTaskDelApi({"id":source.id}).then(res=>{
+                    DownLoadBatchDelApi({"id":source.id}).then(res=>{
                         message.warning({content: res.data}).then()
-                        setEditState(true);
+                        QueryData()
                     })
                 }}>删除</Button>
             }
@@ -69,14 +67,22 @@ const DownloadBatch = ()=>{
             <div style={{display:'flex',}}>
                 <Search placeholder="添加链接" onSearch={Submit} enterButton="提交" style={{width:400}}/>
                 {/*<Search placeholder="搜索"    onSearch={Submit} enterButton="搜索" style={{width:400, marginLeft:20}}/>*/}
-                <Button color="cyan" variant="solid" style={{marginLeft:20, width:100}}>
+                <Button color="cyan" variant="solid" style={{marginLeft:20, width:100}} onClick={()=>{
+                    DownLoadBatchStartApi().then(res=>{message.warning({content: res.data}).then()})
+                }}>
                     开始批量下载
                 </Button>
             </div>
             <div style={{marginTop:20}}>
                 {
                     dataSource.length !== 0 ?
-                        <Table dataSource={dataSource} columns={columns} rowKey="id" scroll={{y: tableHeight}} pagination={{pageSize:500}}/>
+                        <Table dataSource={dataSource} 
+                               columns={columns} 
+                               rowKey="id" 
+                               scroll={{y: tableHeight}} 
+                               pagination={{pageSize:100, total:pageTotal}}
+                               onChange={tableChangeHandler}
+                        />
                         : <div></div>
                 }
 

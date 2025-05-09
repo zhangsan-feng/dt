@@ -12,7 +12,7 @@ class HttpRequest:
         self.fail_num = 3
         self.timeout = 3
 
-    async def httpx_get(self, params):
+    async def httpx_get(self, params=None):
         @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
         async def __get():
             try:
@@ -35,7 +35,7 @@ class HttpRequest:
         return await __post()
 
 
-    async def aiohttp_get(self, params):
+    async def aiohttp_get(self, params=None):
         @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
         async def __get():
             try:

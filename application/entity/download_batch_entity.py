@@ -59,8 +59,12 @@ async def batch_add(link):
             session.refresh(download_task)
 
 
-async def batch_query():
+async def batch_query(page):
     with Session(engine) as session:
-        statement = select(DownLoadBatchEntity)
-        results = session.exec(statement).all()
+        results = session.exec(select(DownLoadBatchEntity).offset(page - 1 * 100).limit(100)).all()
+        return results
+
+async def batch_query_all():
+    with Session(engine) as session:
+        results = session.exec(select(DownLoadBatchEntity)).all()
         return results

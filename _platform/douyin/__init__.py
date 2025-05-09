@@ -1,7 +1,7 @@
 import os
 
 from utils import word_analysis, max_index, gen_uid
-from utils.download import download_file, download_flv_stream
+from utils.download import download_stream, download_stream
 from config import Config
 from application.entity.download_record_entity import record_add
 
@@ -46,25 +46,25 @@ async def douyin_data_handler(obj, headers):
         for image in image_link:
             image_file = file + word_analysis(image["uri"]) + ".png"
             image_url = image["url_list"][-1]
-            await download_file(image_url, image_file, headers)
+            await download_stream(image_url, image_file, headers)
             record_obj["files"].append(config.resource_path + image_file.replace(config.save_path, ""))
 
             if "video" in image:
                 video_file = file + word_analysis(image["uri"]) + word_analysis(desc) + ".mp4"
                 video_url = image["video"]["play_addr"]["url_list"][-1]
-                await download_file(video_url, video_file, headers)
+                await download_stream(video_url, video_file, headers)
                 record_obj["files"].append(config.resource_path + video_file.replace(config.save_path, ""))
 
     if video_link:
         video_file = file + word_analysis(desc) + ".mp4"
         video_url = video_link[max_index(video_link, "bit_rate")]["play_addr"]["url_list"][-1]
-        await download_file(video_url, video_file, headers)
+        await download_stream(video_url, video_file, headers)
         record_obj["files"].append(config.resource_path + video_file.replace(config.save_path, ""))
 
     if music_link:
         music_file = file + word_analysis(desc) + ".mp3"
         music_url = music_link["play_url"]["url_list"][-1]
-        await download_file(music_url, music_file, headers)
+        await download_stream(music_url, music_file, headers)
         record_obj["files"].append(config.resource_path + music_file.replace(config.save_path, ""))
 
     if audio_link:
@@ -89,5 +89,5 @@ async def douyin_live_handler(author, title, flv_stream_url, headers):
     record_obj["files"] = ",".join(record_obj["files"])
     await record_add(record_obj)
     headers["referer"] = flv_stream_url
-    await download_flv_stream(flv_stream_url, file, headers)
+    await download_stream(flv_stream_url, file, headers)
 

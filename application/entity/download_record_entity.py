@@ -19,11 +19,17 @@ SQLModel.metadata.create_all(engine)
 
 async def record_add(obj):
     with Session(engine) as session:
-        session.add(DownLoadRecordEntity(**obj))
-        session.commit()
+        if obj["aweme_id"] != "NULL":
+            session.add(DownLoadRecordEntity(**obj))
+            session.commit()
+        else :
+            existing_task = session.exec(select(DownLoadRecordEntity).where(DownLoadRecordEntity.aweme_id == obj["aweme_id"])).first()
+            if not existing_task:
+                session.add(DownLoadRecordEntity(**obj))
+                session.commit()
 
 
-async def record_query(page=1):
+async def record_query(page):
     with Session(engine) as session:
         results = session.exec(
             select(DownLoadRecordEntity)
@@ -33,6 +39,7 @@ async def record_query(page=1):
         ).all()
         # print(results)
         return results
+
 
 async def record_delete(id):
     with Session(engine) as session:

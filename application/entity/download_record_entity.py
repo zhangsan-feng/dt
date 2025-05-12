@@ -34,7 +34,7 @@ async def record_query(page):
         results = session.exec(
             select(DownLoadRecordEntity)
             .order_by(desc(DownLoadRecordEntity.id))
-            .offset(page - 1 * 100)
+            .offset((page - 1 )* 100)
             .limit(100)
         ).all()
         # print(results)

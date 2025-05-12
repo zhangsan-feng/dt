@@ -12,7 +12,7 @@ async def bilibili_detail(bvid, user_agent, cookie):
         'origin': 'https://www.bilibili.com',
         'pragma': 'no-cache',
         'priority': 'u=1, i',
-        'referer': 'https://www.bilibili.com/video/BV1BmVUzQEpA/?spm_id_from=333.1007.tianma.1-1-1.click&vd_source=07a93c10e5d494e36d02dadbc6127d3d',
+        'referer': f'https://www.bilibili.com/video/{bvid}/',
         'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
@@ -20,7 +20,7 @@ async def bilibili_detail(bvid, user_agent, cookie):
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-site',
         'user-agent': user_agent,
-        'cookie': cookie,
+        'cookie': cookie
     }
 
     url = "https://api.bilibili.com/x/web-interface/view?bvid=" + bvid
@@ -56,12 +56,12 @@ async def bilibili_detail(bvid, user_agent, cookie):
     }
     url = "https://api.bilibili.com/x/player/wbi/playurl"
     params = gen_w_rid_params(params)
+
     response = await HttpRequest(url, headers=headers).httpx_get(params)
     dash = response.json()['data']['dash']
     # print(response.text)
 
     await bilibili_data_handler(dash, author, title, bvid, author_id, headers)
-    pass
 
 
 

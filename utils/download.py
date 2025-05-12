@@ -45,5 +45,9 @@ async def download_stream(link, file_name, headers):
             print(f"下载失败: {e}")
             raise
 
+    # if ".mp3" not in file_name: return
+    # if ".mp4" not in file_name: return
+    # if ".png" not in file_name: return
+
     print(f"current download file:{file_name} link:{link}")
     await fetch_and_save(link, file_name)

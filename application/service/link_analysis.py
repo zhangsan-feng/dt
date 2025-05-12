@@ -9,6 +9,7 @@ async def link_analysis(link, user_agent):
     uuid = hashlib.md5(link.encode('utf-8')).hexdigest()
     try:
         if "douyin" in link:
+            # await douyin_adapter(link, user_agent)
             await create(douyin_adapter(link, user_agent), uuid, link)
 
         if "bilibili" in link:

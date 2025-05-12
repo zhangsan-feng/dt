@@ -39,3 +39,23 @@ def gen_uid():
 
 def random_sleep():
     time.sleep(random.uniform(3.0, 6.0))
+
+
+def get_cookie_key(cookie, k):
+    cookie_list = cookie.split(";")
+    for ck in cookie_list:
+        ck_list = ck.split("=")
+        if len(ck_list) != 2:
+            continue
+        key, value = ck_list[0], ck_list[1]
+        # print(key, value)
+        if key.replace(" ", "") == k:
+            # print(key, value)
+            return value
+
+# if __name__ == '__main__':
+#     get_cookie_key(
+#         ""
+#         "UIFID"
+#         # "s_v_web_id"
+#     )

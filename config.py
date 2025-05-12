@@ -9,16 +9,16 @@ class Config:
         self.save_path: str = config_.save_path
         if not os.path.exists(self.save_path): os.makedirs(self.save_path)
 
-        self.douyin_cookie: str = config_.douyin_cookie
-        self.bilibili_cookie: str = config_.bilibili_cookie
-        self.hongshu_cookie: str = config_.hongshu_cookie
-        self.weibo_cookie: str = config_.weibo_cookie
-        self.kuaishou_cookie: str = config_.kuaishou_cookie
+        self.douyin_cookie: str = config_.douyin_cookie if config_.douyin_cookie else ""
+        self.bilibili_cookie: str = config_.bilibili_cookie if config_.bilibili_cookie else ""
+        self.hongshu_cookie: str = config_.hongshu_cookie if config_.hongshu_cookie else ""
+        self.weibo_cookie: str = config_.weibo_cookie if config_.weibo_cookie else ""
+        self.kuaishou_cookie: str = config_.kuaishou_cookie if config_.kuaishou_cookie else ""
 
-        self.douyin_path = self.save_path + "/douyin/"
+        self.douyin_path = self.save_path + "douyin"
         if not os.path.exists(self.douyin_path): os.makedirs(self.douyin_path)
 
-        self.bilibili_path = self.save_path + "/bilibili/"
+        self.bilibili_path = self.save_path + "bilibili"
         if not os.path.exists(self.bilibili_path): os.makedirs(self.bilibili_path)
 
         # self.hongshu_path = self.save_path + "/hongshu/"

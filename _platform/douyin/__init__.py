@@ -26,10 +26,10 @@ async def douyin_data_handler(obj, headers):
     config = Config()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
 
-    # tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
-    # if os.path.exists(tmp_path):os.mkdir(tmp_path)
+    tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
+    if not os.path.exists(tmp_path):os.mkdir(tmp_path)
 
-    file = config.douyin_path + word_analysis(author) + "_" + aweme_id + "_"
+    file = tmp_path + word_analysis(author) + "_" + aweme_id + "_"
 
     record_obj = {
         "aweme_id": aweme_id,
@@ -59,6 +59,8 @@ async def douyin_data_handler(obj, headers):
         record_obj["files"].append(config.resource_path + video_file.replace(config.save_path, ""))
 
     if music_link:
+        if len(music_link["play_url"]["url_list"]) == 0:
+            return
         music_file = file + word_analysis(desc) + ".mp3"
         music_url = music_link["play_url"]["url_list"][-1]
         await download_stream(music_url, music_file, headers)
@@ -73,7 +75,11 @@ async def douyin_data_handler(obj, headers):
 async def douyin_live_handler(author, title, flv_stream_url, headers):
     config = Config()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
-    file = config.douyin_path + word_analysis(author) + "_" + word_analysis(title) + "_" + gen_uid() + ".flv"
+
+    tmp_path =  config.douyin_path + "/" + word_analysis(author) + "/"
+    if not os.path.exists(tmp_path):os.mkdir(tmp_path)
+    file = tmp_path + word_analysis(author) + "_" + word_analysis(title) + "_" + gen_uid() + ".flv"
+
     record_obj = {
         "aweme_id": "NULL",
         "author": author,
@@ -86,3 +92,18 @@ async def douyin_live_handler(author, title, flv_stream_url, headers):
     headers["referer"] = flv_stream_url
     await download_stream(flv_stream_url, file, headers)
 
+
+
+"""
+https://www.douyin.com/user/MS4wLjABAAAA3XNy70giFoK4bZR8JKmEZrkyI66yAsQvv1UROAILi24      麻勒勒
+https://www.douyin.com/user/MS4wLjABAAAAhCtbaJTjDpUmAQNGhihHx_hrobOL5IWSXEKGVTgoUOc      阿七
+https://www.douyin.com/user/MS4wLjABAAAApn56Ol39XDQxiaZQOR2I-yaVKoAqJhzKeT2h3jOlpFI      失眠熊
+https://www.douyin.com/user/MS4wLjABAAAAt37t_G9YHe7o1uQC8RmnYwOw14BQs59ocZyKMbNb2TkHVVmnEp7cDmzIRzF3gWTG 来点宫酱w
+https://www.douyin.com/user/MS4wLjABAAAA4cH-PrI9IbWVUxmcv9h30vV8FMwdTgdmp4-XnLWtlEQ         别捏七七脸
+https://www.douyin.com/user/MS4wLjABAAAAA7tqSFYdDSagFkE_SpWiGRphlbgCyQ4iIxLOMpTkdV0     小花花花儿
+https://www.douyin.com/user/MS4wLjABAAAAfl8D63aFQdpcZc5oUbGPR_Wr7cZl2P66bduaJZT5FszPzpabcLECCDOVt2Y-0xUT    元呆呆
+https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws  封茗囧菌
+https://www.douyin.com/user/MS4wLjABAAAA9V4sakBw8N5agTXKhE0imOs3gDF-3ehe_HcAaVeWZJw     娜娜酱要翻倍
+https://www.douyin.com/user/MS4wLjABAAAArrr6419gq2wn5M8Oy5qRTfZ6GhpIsbd1fmxvT27uMr8     丸子yooo
+
+"""

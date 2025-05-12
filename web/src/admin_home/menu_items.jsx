@@ -1,6 +1,7 @@
 import {
     ClockCircleOutlined, DownloadOutlined, SettingOutlined,
-    VideoCameraAddOutlined, ToolOutlined} from "@ant-design/icons";
+    VideoCameraAddOutlined, ToolOutlined, SlidersOutlined
+} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 
 
@@ -15,7 +16,7 @@ const MenuItems = [
     },
     {
         key: '2',
-        icon: <DownloadOutlined />,
+        icon: <SlidersOutlined />,
         label: <Link to="/download_manager">下载管理</Link> ,
         path:"/download_manager",
         cn:"下载管理",

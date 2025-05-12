@@ -11,7 +11,6 @@ const DownloadBatch = ()=>{
     const [dataSource, setDataSource] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageTotal, setPageTotal] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
@@ -27,11 +26,9 @@ const DownloadBatch = ()=>{
     }, []);
 
     const QueryData = (page=currentPage)=>{
-        if (!hasMore) {return}
         DownLoadBatchQueryApi({"page":page}).then(res=>{
-            if (res.data.length === 0){setHasMore(false)}
             setDataSource(res.data);
-            setPageTotal(res.data.length + 1);
+            setPageTotal((pageTotal)=> pageTotal + res.length + 1);
         })
     }
     const Submit = (value)=>{DownLoadBatchAddApi({"link":value}).then(res=>{message.warning({content: res.data}).then();QueryData()})}

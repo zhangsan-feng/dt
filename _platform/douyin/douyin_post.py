@@ -22,6 +22,7 @@ async def douyin_post(sec_user_id, user_agent, cookie):
         'user-agent': user_agent,
         'cookie': cookie,
     }
+
     max_cursor = 0
     while True:
         params = {
@@ -68,16 +69,17 @@ async def douyin_post(sec_user_id, user_agent, cookie):
         }
 
         headers, params = await gen_params_sign(headers, params)
+
         async with httpx.AsyncClient() as client:
             response = await client.get('https://www.douyin.com/aweme/v1/web/aweme/post/', params=params, headers=headers)
-        # print(response.text)
+
 
         if response:
             json_response = response.json()["aweme_list"]
             # print(json_response)
             for data in json_response:
                 await douyin_data_handler(data, headers)
-
+            # print(response.json()["has_more"])
             if response.json()["has_more"] == 0:
                 break
             max_cursor = response.json()["max_cursor"]

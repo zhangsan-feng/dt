@@ -2,6 +2,7 @@ import asyncio
 from http.cookies import SimpleCookie
 from _platform.douyin.sign import ms_token
 from _platform.douyin.sign.a_bogus_tk import ABogus
+from utils import get_cookie_key
 from utils.http_utls import HttpRequest
 from _platform.douyin import douyin_live_handler
 
@@ -46,18 +47,15 @@ async def web(headers, room_id):
 
 async def app(headers, room_id):
     url = "https://webcast.amemv.com/webcast/room/reflow/info/"
-    cookie = SimpleCookie()
-    cookie.load(headers['cookie'])
-
-    headers["cookie"] = ""
     params = {
-            "verifyFp":cookie.get("s_v_web_id").value,
+            "verifyFp":get_cookie_key(headers["cookie"], "s_v_web_id"),
             "type_id":"0","live_id":"1",
             "room_id":room_id,
             "sec_user_id":room_id,
             "version_code":"99.99.99",
             "app_id":"1128",
         }
+    headers["cookie"] = ""
     response = await HttpRequest(url, headers).httpx_get(params)
     # print(response.text)
 

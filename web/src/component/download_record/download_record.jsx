@@ -44,7 +44,6 @@ const DownloadRecord = ()=>{
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageTotal, setPageTotal] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
@@ -60,23 +59,22 @@ const DownloadRecord = ()=>{
     }, []);
 
     const QueryData = (page=currentPage)=>{
-        if (!hasMore) {return}
         DownLoadRecordQueryApi({"page":page}).then(res => {
-            if (res.length === 0){setHasMore(false)}
             setData(res);
-            setPageTotal(res.length + 1);
+            setPageTotal((pageTotal)=> pageTotal + res.length + 1);
         });
     }
-
-    const currentPageRef = useRef(currentPage);
-    useEffect(() => {currentPageRef.current = currentPage;}, [currentPage]);
+    useEffect(() => {QueryData()}, []);
     useEffect(() => {
-        QueryData();
-        const intervalId = setInterval(() => {QueryData(currentPageRef.current);}, 3000);
-        return () => clearInterval(intervalId);
-    }, []);
+        if (currentPage === 1) {
+            const intervalId = setInterval(() => {
+                    DownLoadRecordQueryApi({"page":currentPage}).then(res => {setData(res)});
+                }, 3000);
+            return () => clearInterval(intervalId);
+        }
+    }, [currentPage]);
 
-    const tableChangeHandler = (value)=> {setCurrentPage(value.current)}
+    const tableChangeHandler = (value)=> {setCurrentPage(value.current); QueryData(value.current)}
 
     const columns = [
         {title: 'id', dataIndex: 'id', key: 'id', width: 80,ellipsis:true},

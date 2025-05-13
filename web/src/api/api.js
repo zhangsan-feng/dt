@@ -11,6 +11,7 @@ export const DownLoadBatchAddApi = (p)=> HttpPost(`/api/download_batch_add`, p);
 export const DownLoadBatchDelApi = (p)=> HttpPost(`/api/download_batch_del`, p);
 export const DownLoadBatchQueryApi = (p)=> HttpGet(`/api/download_batch_query`, p);
 export const DownLoadRecordQueryApi = (p)=> HttpGet(`/api/download_record_query`, p);
+export const DownLoadRecordCleanApi = (p)=> HttpPost(`/api/download_record_clean`, p);
 export const DownLoadRecordDeleteApi = (p)=> HttpPost(`/api/download_record_delete`, p);
 export const DownLoadManagerQueryApi = (p)=> HttpGet(`/api/download_manger_query`, p);
 export const DownLoadManagerKillApi = (p)=> HttpPost(`/api/download_manger_kill`, p);

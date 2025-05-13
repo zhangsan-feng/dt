@@ -68,7 +68,7 @@ async def douyin_post(sec_user_id, user_agent, cookie):
             'round_trip_time': '100',
         }
 
-        headers, params = await gen_params_sign(headers, params)
+        await gen_params_sign(headers, params)
 
         async with httpx.AsyncClient() as client:
             response = await client.get('https://www.douyin.com/aweme/v1/web/aweme/post/', params=params, headers=headers)

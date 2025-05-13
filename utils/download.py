@@ -42,7 +42,7 @@ async def download_stream(link, file_name, headers):
                             f.write(chunk)
                     print(f"FLV stream saved: {save_path}")
         except Exception as e:
-            print(f"下载失败: {e}")
+            print(f"下载失败: {e} file:{save_path} link:{link}")
             raise
 
     # if ".mp3" not in file_name: return

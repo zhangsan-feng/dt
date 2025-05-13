@@ -37,12 +37,12 @@ async def web(headers, room_id):
     # print(response.text)
 
     response_body = response.json()
-    # print(response_body)
+    print(response_body)
 
     author = response_body['data']['user']['nickname']
     title = response_body['data']['data'][0]['title']
-    flv_stream_url = response_body['data']["similar_rooms"][0]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"]
-
+    flv_stream_url = response_body['data']["data"][0]["stream_url"]["flv_pull_url"]["FULL_HD1"]
+    print(author, title, flv_stream_url)
     await douyin_live_handler(author, title, flv_stream_url, headers)
 
 async def app(headers, room_id):
@@ -101,6 +101,7 @@ if __name__ == '__main__':
     """
     9- #在抖音，记录美好生活#【带土土（国服艾琳）】正在直播，来和我一起支持Ta吧。复制下方链接，打开【抖音】，直接观看直播！ https://v.douyin.com/H3wlZA9Dyyg/ 3@5.com :2pm
     https://live.douyin.com/82036225582?room_id=7497878603699571467&enter_from_merge=web_share_link&enter_method=web_share_link&previous_page=app_code_link&camera_id=0
+    https://live.douyin.com/969483737859
     """
 
 

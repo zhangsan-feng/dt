@@ -73,13 +73,16 @@ const DownloadBatch = ()=>{
             <div style={{marginTop:20}}>
                 {
                     dataSource.length !== 0 ?
-                        <Table dataSource={dataSource} 
-                               columns={columns} 
-                               rowKey="id" 
-                               scroll={{y: tableHeight}} 
-                               pagination={{pageSize:100, total:pageTotal}}
-                               onChange={tableChangeHandler}
-                        />
+                        <div>
+
+                            <Table dataSource={dataSource}
+                                   columns={columns}
+                                   rowKey="id"
+                                   scroll={{y: tableHeight}}
+                                   pagination={{pageSize:100, total:pageTotal}}
+                                   onChange={tableChangeHandler}
+                            />
+                        </div>
                         : <div></div>
                 }
 

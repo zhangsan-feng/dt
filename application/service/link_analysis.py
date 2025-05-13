@@ -13,6 +13,7 @@ async def link_analysis(link, user_agent):
             await create(douyin_adapter(link, user_agent), uuid, link)
 
         if "bilibili" in link:
+            # await bilibili_adapter(link, user_agent)
             await create(bilibili_adapter(link, user_agent), uuid, link)
 
     except Exception as e:

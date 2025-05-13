@@ -52,7 +52,7 @@ async def video_detail(aweme_id, user_agent, cookie):
         'effective_type': '4g',
         'round_trip_time': '50',
     }
-    headers, params = await gen_params_sign(headers, params)
+    await gen_params_sign(headers, params)
     # print(json.dumps(params, ensure_ascii=False , indent=4))
     async with httpx.AsyncClient() as client:
         response = await client.get('https://www.douyin.com/aweme/v1/web/aweme/detail/', params=params, headers=headers)

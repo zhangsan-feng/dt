@@ -1,4 +1,5 @@
 
+from utils.http_utls import HttpRequest
 
 async def hongshu_post(link, cookie, user_agent):
     url = "https://edith.xiaohongshu.com/api/sns/web/v1/user_posted"
@@ -23,12 +24,13 @@ async def hongshu_post(link, cookie, user_agent):
         'x-s-common': '',
         'x-t': '',
         'x-xray-traceid': '',
-}
+    }
     params = {
         "num":30,
         "cursor":"",
         "user_id":'user_id',
         "image_formats":"jpg,webp,avif",
-        "xsec_token":'url_params['']',
-        "xsec_source":'url_params['']'
+        "xsec_token":"",
+        "xsec_source":""
     }
+    response = await HttpRequest(url, headers).httpx_get(params=params)

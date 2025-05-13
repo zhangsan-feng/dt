@@ -6,7 +6,7 @@ import struct
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from typeguard import typechecked
-from _platform.hongshu.sign  import xn, xn64
+from _platform.hongshu.sign.sign_params import *
 
 
 class XsEncrypt:

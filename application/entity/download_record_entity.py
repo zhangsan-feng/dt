@@ -1,6 +1,6 @@
 from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
-from sqlalchemy import String, Integer, Column, Text, desc
+from sqlalchemy import String, Integer, Column, Text, desc, or_, and_
 from application.entity import engine
 
 
@@ -47,3 +47,25 @@ async def record_delete(id):
         if task:
             session.delete(task)
             session.commit()
+
+async def record_clean():
+    with Session(engine) as session:
+        session.exec("DELETE FROM record;")
+        session.exec("DELETE FROM sqlite_sequence WHERE name='record';")  # 重置自增ID
+        session.commit()
+
+async def record_search(key_word):
+    with Session(engine) as session:
+        query = select(DownLoadRecordEntity)
+
+        conditions = []
+        conditions.append(or_(
+            DownLoadRecordEntity.author.contains(key_word),
+            DownLoadRecordEntity.desc.contains(key_word)
+        ))
+
+        if conditions:
+            query = query.where(and_(*conditions))
+
+        result = session.exec(query)
+        return result.all()

@@ -1,6 +1,6 @@
 import asyncio
 import httpx
-from _platform.douyin import sign
+from _platform.douyin.sign import gen_params_sign
 
 
 async def douyin_collect(cookie):
@@ -62,7 +62,7 @@ async def douyin_collect(cookie):
     }
     url = 'https://www.douyin.com/aweme/v1/web/aweme/listcollection/'
 
-    headers, params = await sign.gen_params_sign(headers, params)
+    await gen_params_sign(headers, params)
     async with httpx.AsyncClient() as client:
         response = await client.post(url=url, params=params, headers=headers, data=data)
     if response:

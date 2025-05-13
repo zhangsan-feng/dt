@@ -19,11 +19,18 @@ web
     
     
 ```
+![链接下载.png](md/%E9%93%BE%E6%8E%A5%E4%B8%8B%E8%BD%BD.png)
+![下载管理_1.png](md/%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86_1.png)
+![下载管理_2.png](md/%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86_2.png)
+![下载配置.png](md/%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE.png)
+![下载记录.png](md/%E4%B8%8B%E8%BD%BD%E8%AE%B0%E5%BD%95.png)
+![下载记录详情_1.png](md/%E4%B8%8B%E8%BD%BD%E8%AE%B0%E5%BD%95%E8%AF%A6%E6%83%85_1.png)
+![下载记录详情_2.png](md/%E4%B8%8B%E8%BD%BD%E8%AE%B0%E5%BD%95%E8%AF%A6%E6%83%85_2.png)
+![下载预览.png](md/%E4%B8%8B%E8%BD%BD%E9%A2%84%E8%A7%88.png)
 
 
-![1.png](md/1.png)
-![2.png](md/2.png)
-![3.png](md/3.png)
-![4.png](md/4.png)
-![5.png](md/5.png)
-![6.png](md/6.png)
+
+
+
+
+

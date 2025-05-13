@@ -1,7 +1,7 @@
 import json
 import random
 import urllib.parse
-from _platform.hongshu.sign import ie, lookup
+from _platform.hongshu.sign.sign_params import *
 
 
 class XscEncrypt:

@@ -62,7 +62,7 @@ async def douyin_like(sec_user_id, user_agent, cookie):
             'round_trip_time': '200',
         }
         url = 'https://www.douyin.com/aweme/v1/web/aweme/favorite/'
-        headers, params = await gen_like_params_sign(headers, params)
+        await gen_like_params_sign(headers, params)
         async with httpx.AsyncClient() as client:
             response =  await client.get(url=url, params=params, headers=headers)
             # print(response.text)

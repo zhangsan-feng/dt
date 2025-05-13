@@ -1,10 +1,12 @@
 import React, {useLayoutEffect, useRef} from 'react';
 import { Space, Table } from 'antd';
-import {DownLoadRecordDeleteApi, DownLoadRecordQueryApi} from '../../api/api'
+import {DownLoadRecordDeleteApi, DownLoadRecordQueryApi, DownLoadRecordCleanApi} from '../../api/api'
 import {useState, useEffect} from 'react'
-import { Button, Modal, Image } from 'antd';
+import { Button, Modal, Image, Input } from 'antd';
 import ReactPlayer from "react-player";
 import './download_record.css'
+
+const {Search} = Input
 
 const LocalizedModal = (source) => {
     const [open, setOpen] = useState(false);
@@ -96,18 +98,29 @@ const DownloadRecord = ()=>{
         },
     ];
 
+    const RecordCleanButton = ()=>{
+        DownLoadRecordCleanApi().then(res => { QueryData()})
+
+    }
 
     return (
         <div>
+
             {
                 data.length !== 0 ?
-                    <Table dataSource={data}
-                           columns={columns}
-                           rowKey="id"
-                           scroll={{y: tableHeight}}
-                           pagination={{pageSize:100, total:pageTotal}}
-                           onChange={tableChangeHandler}
-                    />
+                    <div>
+                        <div>
+                            <Search style={{width:500}}></Search>
+                            <Button style={{marginLeft:20}} onClick={RecordCleanButton}>清空历史记录</Button>
+                        </div>
+                        <Table dataSource={data}
+                               columns={columns}
+                               rowKey="id"
+                               scroll={{y: tableHeight}}
+                               pagination={{pageSize:100, total:pageTotal}}
+                               onChange={tableChangeHandler}
+                        />
+                    </div>
                     : <div></div>
             }
         </div>

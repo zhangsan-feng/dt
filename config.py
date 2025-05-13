@@ -37,3 +37,9 @@ class Config:
         self.port = 8000
         self.address = self.host + ":" + str(self.port)
         self.resource_path = "http://" + self.address + "/download/"
+
+    def get_cookie(self, platform):
+        pass
+
+    def get_proxy(self):
+        pass

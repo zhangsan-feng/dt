@@ -23,7 +23,7 @@ async def gen_params_sign(headers, params):
 
     # headers['uifid']     = cookie.get("UIFID").value
 
-    return headers, params
+
 
 async def gen_like_params_sign(headers, params):
     cookie = SimpleCookie()
@@ -42,7 +42,6 @@ async def gen_like_params_sign(headers, params):
 
     headers['uifid']     = cookie.get("UIFID").value
 
-    return headers, params
 
 
 

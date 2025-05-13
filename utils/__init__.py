@@ -53,6 +53,15 @@ def get_cookie_key(cookie, k):
             # print(key, value)
             return value
 
+def generate_random_string(length):
+    characters = '0123456789abcdefghijklmnopqrstuvwxyz'
+    return ''.join(random.choice(characters) for _ in range(length))
+
+def generate_random_upper_string(length):
+    characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    return ''.join(random.choice(characters) for _ in range(length))
+
+
 # if __name__ == '__main__':
 #     get_cookie_key(
 #         ""

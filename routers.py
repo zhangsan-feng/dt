@@ -6,7 +6,7 @@ from application.api.file_obj import file_object_stream
 from application.api.preview import preview_api
 from application.api.link_analysis import link_analysis_api
 from application.api.process import process_status, process_kill
-from application.api.record import record_query_api, record_delete_api
+from application.api.record import record_query_api, record_delete_api, record_clean_api, record_search_api
 from application.service.process_manager import kill_all
 
 api_router = APIRouter()
@@ -23,10 +23,6 @@ async def config_query():
 @api_router.get("/download_batch_query")
 async def download_batch_query(request: Request):
     return await download_batch_query_api(request)
-
-@api_router.post("/download_batch_start")
-async def download_batch_start(request: Request):
-    return await download_batch_start_api(request)
 
 @api_router.post("/download_batch_del")
 async def download_batch_del(request: Request):
@@ -55,6 +51,14 @@ async def record_query(request: Request):
 @api_router.post("/download_record_delete")
 async def record_delete(request: Request):
     return await record_delete_api(request)
+
+@api_router.post("/download_record_clean")
+async def record_clean():
+    await record_clean_api()
+
+@api_router.get("/download_record_search")
+async def record_search(request: Request):
+    return await record_search_api(request)
 
 @api_router.get("/download_manger_query")
 async def download_manger_query():

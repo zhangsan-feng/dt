@@ -11,6 +11,8 @@ web
     目前支持
     _platform/douyin/douyin_detail              单视频
     _platform/douyin/douyin_post                用户主页
+    _platform/douyin/douyin_like                用户点赞(没有加入api 需要自己单独运行)
+    _platform/douyin/douyin_collect             用户收藏(没有加入api 需要自己单独运行)
     _platform/douyin/douyin_live                直播
     _platform/bilibili/bilibili_live            直播
     _platform/bilibili/bilibili_detail          单视频

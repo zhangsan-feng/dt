@@ -1,5 +1,7 @@
 import asyncio
 import httpx
+
+from _platform.douyin import douyin_data_handler
 from _platform.douyin.sign import gen_params_sign
 
 
@@ -55,18 +57,25 @@ async def douyin_collect(cookie):
         'effective_type': '4g',
         'round_trip_time': '100',
     }
-
     data = {
         'count': '10',
         'cursor': cursor,
     }
     url = 'https://www.douyin.com/aweme/v1/web/aweme/listcollection/'
+    while True:
+        await gen_params_sign(headers, params)
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url=url, params=params, headers=headers, data=data)
+            print(response.text)
 
-    await gen_params_sign(headers, params)
-    async with httpx.AsyncClient() as client:
-        response = await client.post(url=url, params=params, headers=headers, data=data)
-    if response:
-        print(response.text)
+        if response:
+            json_response = response.json()["aweme_list"]
+            # print(json_response)
+            for data in json_response:
+                await douyin_data_handler(data, headers)
+            if response.json()["has_more"] == 0:
+                break
+            data["cursor"] = response.json()["cursor"]
 
 if __name__ == '__main__':
     asyncio.run(

@@ -1,13 +1,11 @@
 # https://github.com/Cloxl/xhshow
-# https://github.com/cv-cat/Spider_XHS/tree/master
+# https://github.com/cv-cat/Spider_XHS
 import math
 import execjs
 from _platform.hongshu.sign.xs_comm import XscEncrypt
 from _platform.hongshu.sign.xs import XsEncrypt
 from _platform.hongshu.sign.sign_other import MiscEncrypt
 from utils import *
-import time
-
 
 
 current_file_path = os.path.abspath(__file__)

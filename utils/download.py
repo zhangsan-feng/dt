@@ -40,7 +40,7 @@ async def download_stream(link, file_name, headers):
                     with open(save_path, "wb") as f:
                         async for chunk in response.aiter_bytes():
                             f.write(chunk)
-                    print(f"FLV stream saved: {save_path}")
+                    print(f"file saved to: {save_path}")
         except Exception as e:
             print(f"下载失败: {e} file:{save_path} link:{link}")
             raise

@@ -24,7 +24,7 @@ const DownLoadManager = () => {
 
     const columns = [
         {title: 'uuid', dataIndex: 'uuid', key: 'uuid', width: 300},
-        {title: 'link', dataIndex: 'link', key: 'link'},
+        {title: 'link', dataIndex: 'link', key: 'link', width: 200,ellipsis:true},
         {title: 'status', dataIndex: 'status', key: 'status', width: 100},
         {title: '', key: '', dataIndex: '', width:80, render: (text, source) => {
             if (source.status === '运行中') {
@@ -36,8 +36,9 @@ const DownLoadManager = () => {
         },
     ];
 
+    useEffect(()=>{DownLoadManagerQueryApi().then(res => {setData(res); setPageTotal(res.length);});}, [])
+
     useEffect(() => {
-        DownLoadManagerQueryApi().then(res => {setData(res); setPageTotal(res.length);});
         const intervalId = setInterval(() => {DownLoadManagerQueryApi().then(res => setData(res));}, 3000);
         return () => {clearInterval(intervalId);};
     }, []);

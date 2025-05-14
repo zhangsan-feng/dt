@@ -110,7 +110,7 @@ const DownloadRecord = ()=>{
                 data.length !== 0 ?
                     <div>
                         <div>
-                            <Search style={{width:500}}></Search>
+                            <Search style={{width:"50%"}}></Search>
                             <Button style={{marginLeft:20}} onClick={RecordCleanButton}>清空历史记录</Button>
                         </div>
                         <Table dataSource={data}

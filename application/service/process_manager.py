@@ -11,14 +11,17 @@ async def func(uuid):
 
 async def create(fn, uuid, link):
     async with lock:
-        if uuid in M and M[uuid]["pid"].done():
-            return
+
+        # loop = asyncio.get_event_loop()
+        # loop.set_debug(True)
         pid = asyncio.create_task(fn)
+        # await pid
         M[uuid] = {
             "pid": pid,
             "link": link,
             "status":"运行中"
         }
+        # await pid
 
 
 async def query():

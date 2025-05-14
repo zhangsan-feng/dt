@@ -27,7 +27,7 @@ current_file_path = os.path.abspath(__file__)
 project_dir = os.path.dirname(current_file_path)
 project_dir = os.path.dirname(project_dir)
 project_dir = os.path.dirname(project_dir).replace("\\", "/")
-print(f"工作目录: {project_dir}")
+# print(f"工作目录: {project_dir}")
 
 
 with Session(engine) as session:

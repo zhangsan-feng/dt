@@ -14,6 +14,8 @@ web
     _platform/douyin/douyin_live                直播
     _platform/bilibili/bilibili_live            直播
     _platform/bilibili/bilibili_detail          单视频
+    _platform/hongshu/hongshu_detail            单视频
+    _platform/hongshu/hongshu_post              用户主页
     
     支持在下载管理中暂停  直播/批量 下载
     

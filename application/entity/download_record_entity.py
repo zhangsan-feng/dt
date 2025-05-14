@@ -19,7 +19,7 @@ SQLModel.metadata.create_all(engine)
 
 async def record_add(obj):
     with Session(engine) as session:
-        if obj["aweme_id"] != "NULL":
+        if obj["aweme_id"] == "NULL":
             session.add(DownLoadRecordEntity(**obj))
             session.commit()
         else :

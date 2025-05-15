@@ -11,6 +11,10 @@ class DownLoadRecordEntity(SQLModel, table=True):
     author: str = Field(default=None, sa_column=Column(String))
     author_id: str = Field(default=None, sa_column=Column(String))
     desc: str = Field(default=None, sa_column=Column(Text))
+    # follow_status:str = Field(default=None, sa_column=Column(Text))
+    # like_count:str = Field(default=None, sa_column=Column(Text))
+    # commit_count:str = Field(default=None, sa_column=Column(Text))
+    # collect_count:str = Field(default=None, sa_column=Column(Text))
     files: str = Field(default=None, sa_column=Column(Text))
 
 

@@ -12,13 +12,21 @@ class ConfigEntity(SQLModel, table=True):
     id: int = Field(default=None, sa_column=Column(Integer, primary_key=True, autoincrement=True))
     project_path: str = Field(default=None, sa_column=Column(String))
     save_path: str = Field(default=None, sa_column=Column(String))
+
     douyin_cookie: str = Field(sa_column=Column(Text))
     bilibili_cookie: str = Field(sa_column=Column(Text))
     hongshu_cookie: str = Field(sa_column=Column(Text))
     weibo_cookie: str = Field(sa_column=Column(Text))
     kuaishou_cookie: str = Field(sa_column=Column(Text))
+
     proxy: str = Field(sa_column=Column(String))
     update_time:str = Field(sa_column=Column(String))
+
+    # only_video:str = Field(sa_column=Column(String))
+    # only_image:str = Field(sa_column=Column(String))
+    # only_audio:str = Field(sa_column=Column(String))
+
+
 
 # print(CreateTable(ConfigEntity.__table__).compile(engine))
 SQLModel.metadata.create_all(engine)
@@ -62,7 +70,8 @@ def config_edit_(obj):
             model.hongshu_cookie = obj["hongshu_cookie"] if "hongshu_cookie" in obj else ""
             model.weibo_cookie = obj["weibo_cookie"] if "weibo_cookie" in obj else ""
             model.kuaishou_cookie = obj["kuaishou_cookie"] if "kuaishou_cookie" in obj else ""
-            model.proxy = obj["proxy"]
+            model.proxy = obj["proxy"] if "proxy" in obj else ""
+
             model.update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             session.add(model)
             session.commit()

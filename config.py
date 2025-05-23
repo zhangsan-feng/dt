@@ -38,8 +38,21 @@ class Config:
         self.address = self.host + ":" + str(self.port)
         self.resource_path = "http://" + self.address + "/download/"
 
+        self.only_audio = config_.only_audio if config_.only_audio else False
+        self.only_video = config_.only_video if config_.only_video else False
+        self.only_image = config_.only_image if config_.only_image else False
+
+        self.max_download_num = 100
+
     def get_cookie(self, platform):
         pass
 
     def get_proxy(self):
         pass
+
+    def is_download_max(self, file_path):
+        directory  = os.path.dirname(file_path)
+        mp3_count = sum(1 for f in os.listdir(directory) if f.lower().endswith('.mp3'))
+        mp4_count = sum(1 for f in os.listdir(directory) if f.lower().endswith('.mp4'))
+
+        return max(mp3_count, mp4_count) > self.max_download_num

@@ -1,4 +1,3 @@
-from sqlalchemy.sql.ddl import CreateTable
 from sqlmodel import SQLModel, Field, Session, select
 from sqlalchemy import String, Integer, Column, Text, desc, or_, and_
 from application.entity import engine
@@ -11,6 +10,7 @@ class DownLoadRecordEntity(SQLModel, table=True):
     author: str = Field(default=None, sa_column=Column(String))
     author_id: str = Field(default=None, sa_column=Column(String))
     desc: str = Field(default=None, sa_column=Column(Text))
+    # like_count:str = Field(default=None, sa_column=Column(String))
     # follow_status:str = Field(default=None, sa_column=Column(Text))
     # like_count:str = Field(default=None, sa_column=Column(Text))
     # commit_count:str = Field(default=None, sa_column=Column(Text))
@@ -73,3 +73,4 @@ async def record_search(key_word):
 
         result = session.exec(query)
         return result.all()
+

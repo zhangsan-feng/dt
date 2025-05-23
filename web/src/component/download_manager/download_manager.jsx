@@ -11,12 +11,12 @@ const DownLoadManager = () => {
 
     const [tableHeight, setTableHeight] = useState(() => {
         const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 200 : 500;
+        return content ? content.clientHeight - 240 : 500;
     });
     useLayoutEffect(() => {
         const handleResize = () => {
             const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight - 200);}
+            if (content) {setTableHeight(content.clientHeight - 240);}
         };
         window.addEventListener('resize', handleResize);
         return () => {window.removeEventListener('resize', handleResize);};

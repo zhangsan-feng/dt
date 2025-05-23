@@ -2,7 +2,7 @@ import os
 import httpx
 from tenacity import retry, stop_after_attempt, wait_fixed
 from utils.errors import ProcessExit
-
+from config import Config
 
 # async def download_stream(link, file_name, headers):
 #     @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
@@ -25,6 +25,7 @@ from utils.errors import ProcessExit
 #     await fetch_and_save(link, file_name)
 
 
+
 async def download_stream(link, file_name, headers):
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
     async def fetch_and_save(url, save_path):
@@ -45,9 +46,11 @@ async def download_stream(link, file_name, headers):
             print(f"下载失败: {e} file:{save_path} link:{link}")
             raise
 
-    # if ".mp3" not in file_name: return
-    # if ".mp4" not in file_name: return
-    # if ".png" not in file_name: return
+    c = Config()
+    if c.only_video and ".mp4" not in file_name: return
+    if c.only_audio and ".mp3" not in file_name: return
+    if c.only_image and ".png" not in file_name: return
+    if c.is_download_max(file_name): return
 
     print(f"current download file:{file_name} link:{link}")
     await fetch_and_save(link, file_name)

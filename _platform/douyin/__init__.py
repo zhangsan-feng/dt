@@ -95,15 +95,26 @@ async def douyin_live_handler(author, title, flv_stream_url, headers):
 
 
 """
-https://www.douyin.com/user/MS4wLjABAAAA3XNy70giFoK4bZR8JKmEZrkyI66yAsQvv1UROAILi24      麻勒勒
-https://www.douyin.com/user/MS4wLjABAAAAhCtbaJTjDpUmAQNGhihHx_hrobOL5IWSXEKGVTgoUOc      阿七
-https://www.douyin.com/user/MS4wLjABAAAApn56Ol39XDQxiaZQOR2I-yaVKoAqJhzKeT2h3jOlpFI      失眠熊
-https://www.douyin.com/user/MS4wLjABAAAAt37t_G9YHe7o1uQC8RmnYwOw14BQs59ocZyKMbNb2TkHVVmnEp7cDmzIRzF3gWTG 来点宫酱w
-https://www.douyin.com/user/MS4wLjABAAAA4cH-PrI9IbWVUxmcv9h30vV8FMwdTgdmp4-XnLWtlEQ         别捏七七脸
-https://www.douyin.com/user/MS4wLjABAAAAA7tqSFYdDSagFkE_SpWiGRphlbgCyQ4iIxLOMpTkdV0     小花花花儿
-https://www.douyin.com/user/MS4wLjABAAAAfl8D63aFQdpcZc5oUbGPR_Wr7cZl2P66bduaJZT5FszPzpabcLECCDOVt2Y-0xUT    元呆呆
-https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws  封茗囧菌
+妲己把叉进小学
+你蒙恬我妲己把
+
+https://www.douyin.com/user/MS4wLjABAAAA3XNy70giFoK4bZR8JKmEZrkyI66yAsQvv1UROAILi24     麻勒勒
+https://www.douyin.com/user/MS4wLjABAAAAhCtbaJTjDpUmAQNGhihHx_hrobOL5IWSXEKGVTgoUOc     阿七
+https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws     封茗囧菌
 https://www.douyin.com/user/MS4wLjABAAAA9V4sakBw8N5agTXKhE0imOs3gDF-3ehe_HcAaVeWZJw     娜娜酱要翻倍
-https://www.douyin.com/user/MS4wLjABAAAArrr6419gq2wn5M8Oy5qRTfZ6GhpIsbd1fmxvT27uMr8     丸子yooo
+https://www.douyin.com/user/MS4wLjABAAAA4cH-PrI9IbWVUxmcv9h30vV8FMwdTgdmp4-XnLWtlEQ     别捏七七脸
+https://www.douyin.com/user/MS4wLjABAAAAA7tqSFYdDSagFkE_SpWiGRphlbgCyQ4iIxLOMpTkdV0     小花花花儿
+https://www.douyin.com/user/MS4wLjABAAAA0Wk4gxp3AYFnqoqo-IBF6lbdLnrxgjy__DdhPBNBkws     封茗囧菌
+
+
+https://www.douyin.com/user/MS4wLjABAAAAiEDEtRbehZErvMUEpihnHKHzrrRZHDDEZRprEyO_QV8QK15FDZJoJEvdymzs_t4G    麻勒勒
+https://www.douyin.com/user/MS4wLjABAAAAt37t_G9YHe7o1uQC8RmnYwOw14BQs59ocZyKMbNb2TkHVVmnEp7cDmzIRzF3gWTG    来点宫酱w
+https://www.douyin.com/user/MS4wLjABAAAAfl8D63aFQdpcZc5oUbGPR_Wr7cZl2P66bduaJZT5FszPzpabcLECCDOVt2Y-0xUT    元呆呆
+https://www.douyin.com/user/MS4wLjABAAAA8fJt-69-mYzlweq4nFUwwn_i5n3Q3a6kmDDPWUDAdBZnxv-yJ1YdD6cex8ztSie9    无辜的冰淇淋
+https://www.douyin.com/user/MS4wLjABAAAAXjVIBIc_Q9OQPUcFLA-xk4SiFLyQU6WCKavzMwpUujTIq0Coc57FlOwVVT2sbSW0    古宇家办
+https://www.douyin.com/user/MS4wLjABAAAAMuJuqkxAJEYNsqzRugr9DI8a5YgjLOiwm57kqDyXZKjMrBFNYrzFGEjuv8AxseH5    甜饼不加糖
+https://www.douyin.com/user/MS4wLjABAAAAtaLDcs2E3z6WIn4UwhBlxUs-gpE5mly-9hgcD_HW993NxCbKZTRHqS6iARKbPVLA    荒尾
+https://www.douyin.com/user/MS4wLjABAAAAqS6dFfysUGiucs_Nvh9M0YvMyqOD_2Utw347ZZPiM-itUXJeaZEz0M7foaZ72m3x    御女茉莉
+
 
 """

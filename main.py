@@ -39,4 +39,5 @@ https://github.com/wbt5/real-url
 https://github.com/ihmily/DouyinLiveRecorder
 https://github.com/hr3lxphr6j/bililive-go
 https://github.com/putyy/res-downloader
+https://github.com/ihmily/StreamCap
 """

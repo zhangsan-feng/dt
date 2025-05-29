@@ -2,7 +2,7 @@ import axios from "axios";
 import * as qs from 'qs'
 
 
-export const HttpServerAddress = " http://127.0.0.1:8000"
+export const HttpServerAddress = "http://127.0.0.1:8000"
 
 const instance = axios.create({
   baseURL:HttpServerAddress

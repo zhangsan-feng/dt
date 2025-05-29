@@ -38,10 +38,9 @@ class Config:
         self.address = self.host + ":" + str(self.port)
         self.resource_path = "http://" + self.address + "/download/"
 
-        self.only_audio = config_.only_audio if config_.only_audio else False
-        self.only_video = config_.only_video if config_.only_video else False
-        self.only_image = config_.only_image if config_.only_image else False
-
+        self.only_audio = True
+        self.only_video = False
+        self.only_image = False
         self.max_download_num = 100
 
     def get_cookie(self, platform):

@@ -1,7 +1,7 @@
 import {DownLoadManagerQueryApi, DownLoadManagerKillApi} from '../../api/api'
 import React, {useState, useEffect, useLayoutEffect} from 'react'
 import {Button, Space, Table} from "antd";
-
+import AdaptiveHeight from '../adaptive_height_hook'
 
 const DownLoadManager = () => {
 
@@ -9,18 +9,7 @@ const DownLoadManager = () => {
     const [data, setData] = useState([]);
     const [pageTotal, setPageTotal] = useState(0);
 
-    const [tableHeight, setTableHeight] = useState(() => {
-        const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 240 : 500;
-    });
-    useLayoutEffect(() => {
-        const handleResize = () => {
-            const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight - 240);}
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {window.removeEventListener('resize', handleResize);};
-    }, []);
+    const tableHeight = AdaptiveHeight()
 
     const columns = [
         {title: 'uuid', dataIndex: 'uuid', key: 'uuid', width: 300},

@@ -55,7 +55,7 @@ async def record_delete(id):
 async def record_clean():
     with Session(engine) as session:
         session.exec("DELETE FROM record;")
-        session.exec("DELETE FROM sqlite_sequence WHERE name='record';")  # 重置自增ID
+        session.exec("DELETE FROM sqlite_sequence WHERE name='record';")
         session.commit()
 
 async def record_search(key_word):

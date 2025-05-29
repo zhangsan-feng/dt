@@ -5,7 +5,7 @@ import './download_preview.css'
 import {FilePreviewApi} from '../../api/api'
 import {useState, useEffect, useRef, useLayoutEffect} from 'react'
 import Masonry from "react-masonry-css";
-
+import AdaptiveHeight from '../adaptive_height_hook'
 
 const LazyVideoPlayer1 = ({ url }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -60,19 +60,7 @@ const DownloadPreview = ()=>{
     const [hasMore, setHasMore] = useState(true);
     const debounceTimer = useRef(null);
 
-    const [tableHeight, setTableHeight] = useState(() => {
-        const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 100 : 500;
-    });
-    useLayoutEffect(() => {
-        const handleResize = () => {
-            const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight -100);}
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {window.removeEventListener('resize', handleResize);};
-    }, []);
-
+    const tableHeight = AdaptiveHeight()
 
     const loadMoreData = ()=>{
         if (!hasMore){return}

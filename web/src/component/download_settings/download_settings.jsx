@@ -2,8 +2,12 @@
 import  { useState, useEffect } from 'react';
 import {Button, Form, Input, message, Radio} from 'antd';
 import {ConfigEditApi, ConfigQueryApi} from "../../api/api.js";
+import AdaptiveHeight from '../adaptive_height_hook'
 
 const DownloadSettings = ()=>{
+
+    const tableHeight = AdaptiveHeight()
+
     const [form] = Form.useForm();
     useEffect(() => {
         ConfigQueryApi({}).then(res=>{
@@ -28,12 +32,12 @@ const DownloadSettings = ()=>{
 
 
     return (
-        <div style={{marginTop:"2%"}}>
+        <div style={{marginTop:"2%", height:tableHeight}}>
             <Form  onFinish={onFinish} form={form} labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
                 <Form.Item label="douyin_cookie" name="douyin_cookie"><Input placeholder="" /></Form.Item>
                 <Form.Item label="bilibili_cookie" name="bilibili_cookie"><Input placeholder="" /></Form.Item>
                 <Form.Item label="hongshu_cookie" name="hongshu_cookie"><Input placeholder="" /></Form.Item>
-                {/*<Form.Item label="weibo_cookie" name="weibo_cookie"><Input placeholder="" /></Form.Item>*/}
+                <Form.Item label="weibo_cookie" name="weibo_cookie"><Input placeholder="" /></Form.Item>
                 {/*<Form.Item label="kuaishou_cookie" name="kuaishou_cookie"><Input placeholder="" /></Form.Item>*/}
                 <Form.Item label="代理" name="proxy"><Input placeholder="" /></Form.Item>
                 <Form.Item label="下载路径" name="save_path"><Input placeholder="" /></Form.Item>

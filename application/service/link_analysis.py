@@ -1,4 +1,4 @@
-import hashlib
+from _platform.weibo.webbo_adapter import weibo_adapter
 from uuid import uuid4
 from _platform.bilibili.bilibili_adapter import bilibili_adapter
 from _platform.douyin.douyin_adapter import douyin_adapter
@@ -20,5 +20,8 @@ async def link_analysis(link, user_agent):
         if "xiaohongshu" in link or "xhslink" in link:
             # await hongshu_adapter(link, user_agent)
             await create(hongshu_adapter(link, user_agent), uuid, link)
+
+        if "weibo" in link:
+            await create(weibo_adapter(link, user_agent), uuid, link)
     except Exception as e:
         print(e)

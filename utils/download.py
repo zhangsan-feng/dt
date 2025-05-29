@@ -50,7 +50,8 @@ async def download_stream(link, file_name, headers):
     if c.only_video and ".mp4" not in file_name: return
     if c.only_audio and ".mp3" not in file_name: return
     if c.only_image and ".png" not in file_name: return
-    if c.is_download_max(file_name): return
+    if c.is_download_max(file_name): raise ProcessExit("download max exit")
 
     print(f"current download file:{file_name} link:{link}")
     await fetch_and_save(link, file_name)
+

@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react'
 import { Button, Modal, Image, Input } from 'antd';
 import ReactPlayer from "react-player";
 import './download_record.css'
+import AdaptiveHeight from "../adaptive_height_hook";
 
 const {Search} = Input
 
@@ -47,18 +48,7 @@ const DownloadRecord = ()=>{
     const [currentPage, setCurrentPage] = useState(1);
     const [pageTotal, setPageTotal] = useState(1);
 
-    const [tableHeight, setTableHeight] = useState(() => {
-        const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 240 : 500;
-    });
-    useLayoutEffect(() => {
-        const handleResize = () => {
-            const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight - 240);}
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {window.removeEventListener('resize', handleResize);};
-    }, []);
+    const tableHeight = AdaptiveHeight(240)
 
     const QueryData = (page=currentPage)=>{
         DownLoadRecordQueryApi({"page":page}).then(res => {
@@ -98,10 +88,7 @@ const DownloadRecord = ()=>{
         },
     ];
 
-    const RecordCleanButton = ()=>{
-        DownLoadRecordCleanApi().then(res => { QueryData()})
-
-    }
+    const RecordCleanButton = ()=>{DownLoadRecordCleanApi().then(res => { QueryData()})}
 
     return (
         <div>

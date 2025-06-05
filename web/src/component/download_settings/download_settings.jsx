@@ -37,7 +37,7 @@ const DownloadSettings = ()=>{
                 <Form.Item label="douyin_cookie" name="douyin_cookie"><Input placeholder="" /></Form.Item>
                 <Form.Item label="bilibili_cookie" name="bilibili_cookie"><Input placeholder="" /></Form.Item>
                 <Form.Item label="hongshu_cookie" name="hongshu_cookie"><Input placeholder="" /></Form.Item>
-                <Form.Item label="weibo_cookie" name="weibo_cookie"><Input placeholder="" /></Form.Item>
+                {/*<Form.Item label="weibo_cookie" name="weibo_cookie"><Input placeholder="" /></Form.Item>*/}
                 {/*<Form.Item label="kuaishou_cookie" name="kuaishou_cookie"><Input placeholder="" /></Form.Item>*/}
                 <Form.Item label="代理" name="proxy"><Input placeholder="" /></Form.Item>
                 <Form.Item label="下载路径" name="save_path"><Input placeholder="" /></Form.Item>

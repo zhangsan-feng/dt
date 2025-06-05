@@ -30,7 +30,7 @@ if __name__ == '__main__':
     # os.remove("./store.duckdb")
     # from application.db import DuckDBConfigure
     # DuckDBConfigure().init_duckdb()
-    uvicorn.run('main:app', host=config.host, port=config.port, reload=True)
+    uvicorn.run('main:app', host=config.host, port=config.port)
 
 """
 

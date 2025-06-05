@@ -21,9 +21,9 @@ class Config:
         self.bilibili_path = self.save_path + "bilibili"
         if not os.path.exists(self.bilibili_path): os.makedirs(self.bilibili_path)
 
-        self.hongshu_path = self.save_path + "/hongshu/"
+        self.hongshu_path = self.save_path + "hongshu"
         if not os.path.exists(self.hongshu_path): os.makedirs(self.hongshu_path)
-        #
+
         # self.weibo_path = self.save_path + "/weibo/"
         # if not os.path.exists(self.weibo_path): os.makedirs(self.weibo_path)
         #
@@ -41,7 +41,12 @@ class Config:
         self.only_audio = True
         self.only_video = False
         self.only_image = False
-        self.max_download_num = 100
+        self.max_download_num = 300
+        self.download_limit   = True
+        self.download_format  = True
+        self.download_filter  = False
+        self.download_delay   = False
+        self.download_delay_num = 1.5
 
     def get_cookie(self, platform):
         pass
@@ -49,9 +54,3 @@ class Config:
     def get_proxy(self):
         pass
 
-    def is_download_max(self, file_path):
-        directory  = os.path.dirname(file_path)
-        mp3_count = sum(1 for f in os.listdir(directory) if f.lower().endswith('.mp3'))
-        mp4_count = sum(1 for f in os.listdir(directory) if f.lower().endswith('.mp4'))
-
-        return max(mp3_count, mp4_count) > self.max_download_num

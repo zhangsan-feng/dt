@@ -1,13 +1,13 @@
 import os
 import subprocess
-from application.entity.download_record_entity import record_add
-from config import Config
+from application.entity.record_entity import record_add
+from application.entity.config_entity import ConfigEntityObject
 from utils import word_analysis, gen_uid
 from utils.download import download_stream, download_stream
 
 
 async def bilibili_data_handler(obj, author, title, aweme_id, author_id, headers):
-    config = Config()
+    config = ConfigEntityObject()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
 
     tmp_path =  config.bilibili_path + "/" + word_analysis(author) + "/"
@@ -47,7 +47,7 @@ async def bilibili_data_handler(obj, author, title, aweme_id, author_id, headers
 
 
 async def bilibili_live_handler(author, title, flv_stream_url, headers):
-    config = Config()
+    config = ConfigEntityObject()
     # print(json.dumps(obj_dict, indent=4, ensure_ascii=False))
 
     tmp_path =  config.bilibili_path + "/" + word_analysis(author) + "/"

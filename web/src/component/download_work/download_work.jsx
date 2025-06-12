@@ -20,7 +20,8 @@ const DownloadWork = ()=>{
         <div style={{marginTop: "2%", marginLeft: "10%", marginRight: "10%", height: "100%",}}>
             <div>
                 <Form form={form} onFinish={onFinish}  >
-                    <Form.Item  name="link" ><Input placeholder="视频下载"style={{resize:"none", height:50}}/></Form.Item>
+                    <Form.Item  name="link" ><Input placeholder="视频链接" style={{resize:"none", height:50}}/></Form.Item>
+                    <Form.Item  name="file_path" ><Input placeholder="文件路径" style={{resize:"none", height:50}}/></Form.Item>
                     <Form.Item style={{display: 'flex', justifyContent: 'center'}}>
                         <Button type="primary" htmlType="submit" style={{width: 150}}>下载</Button>
                     </Form.Item>

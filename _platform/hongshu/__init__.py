@@ -1,7 +1,7 @@
 import os
 
-from application.entity.download_record_entity import record_add
-from config import Config
+from application.entity.record_entity import record_add
+from application.entity.config_entity import ConfigEntityObject
 from utils import word_analysis
 from utils.download import download_stream
 
@@ -16,7 +16,7 @@ async def hongshu_data_handler(obj, headers):
     author = word_analysis(obj[0]["note_card"]["user"]["nickname"])
     author_id = word_analysis(obj[0]["note_card"]["user"]["user_id"])
 
-    config = Config()
+    config = ConfigEntityObject()
     tmp_path =  config.hongshu_path + "/" + word_analysis(author) + "/"
     if not os.path.exists(tmp_path):os.mkdir(tmp_path)
     file = tmp_path + word_analysis(author) + "_" + aweme_id + "_"

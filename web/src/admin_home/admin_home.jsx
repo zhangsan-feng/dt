@@ -6,6 +6,7 @@ import AdminHomeMenu from "./admin_home_menu.jsx";
 const { Content, Sider } = Layout;
 
 const AdminHome = () =>{
+
     return(
         <div style={{height:"100%"}} className="home-sider">
             <Layout style={{height:"100%"}}>

@@ -6,7 +6,7 @@ import AdaptiveHeight from '../adaptive_height_hook'
 
 const DownloadSettings = ()=>{
 
-    const tableHeight = AdaptiveHeight()
+    const adapterHeight = AdaptiveHeight()
 
     const [form] = Form.useForm();
     useEffect(() => {
@@ -32,7 +32,7 @@ const DownloadSettings = ()=>{
 
 
     return (
-        <div style={{marginTop:"2%", height:tableHeight}}>
+        <div style={{marginTop:"2%", height:adapterHeight}}>
             <Form  onFinish={onFinish} form={form} labelCol={{ span: 4 }} wrapperCol={{ span: 16 }}>
                 <Form.Item label="douyin_cookie" name="douyin_cookie"><Input placeholder="" /></Form.Item>
                 <Form.Item label="bilibili_cookie" name="bilibili_cookie"><Input placeholder="" /></Form.Item>

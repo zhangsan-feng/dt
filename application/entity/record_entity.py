@@ -1,5 +1,5 @@
 from sqlmodel import SQLModel, Field, Session, select
-from sqlalchemy import String, Integer, Column, Text, desc, or_, and_
+from sqlalchemy import String, Integer, Column, Text, desc, or_, and_, text
 from application.entity import engine
 
 
@@ -10,12 +10,16 @@ class DownLoadRecordEntity(SQLModel, table=True):
     author: str = Field(default=None, sa_column=Column(String))
     author_id: str = Field(default=None, sa_column=Column(String))
     desc: str = Field(default=None, sa_column=Column(Text))
-    # like_count:str = Field(default=None, sa_column=Column(String))
-    # follow_status:str = Field(default=None, sa_column=Column(Text))
-    # like_count:str = Field(default=None, sa_column=Column(Text))
-    # commit_count:str = Field(default=None, sa_column=Column(Text))
-    # collect_count:str = Field(default=None, sa_column=Column(Text))
+    like_count:str = Field(default=None, sa_column=Column(String))
+    follow_status:str = Field(default=None, sa_column=Column(Text))
+    commit_count:str = Field(default=None, sa_column=Column(Text))
+    collect_count:str = Field(default=None, sa_column=Column(Text))
     files: str = Field(default=None, sa_column=Column(Text))
+
+
+class RecordEntityObject:
+    def __int__(self):
+        pass
 
 
 # print(CreateTable(DownLoadRecordEntity.__table__).compile(engine))
@@ -54,8 +58,8 @@ async def record_delete(id):
 
 async def record_clean():
     with Session(engine) as session:
-        session.exec("DELETE FROM record;")
-        session.exec("DELETE FROM sqlite_sequence WHERE name='record';")
+        session.exec(text("DELETE FROM record;"))
+        # session.exec(text("DELETE FROM sqlite_sequence WHERE name='record';"))
         session.commit()
 
 async def record_search(key_word):

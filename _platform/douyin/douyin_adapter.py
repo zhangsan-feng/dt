@@ -4,7 +4,7 @@ import httpx
 from _platform.douyin.douyin_detail import video_detail
 from _platform.douyin.douyin_live import douyin_live
 from _platform.douyin.douyin_post import douyin_post
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
 
 
 
@@ -31,7 +31,7 @@ async def douyin_adapter(link, user_agent):
             print(response.headers.get("location"))
             link = response.headers.get("location")
 
-    cookie = Config().douyin_cookie
+    cookie = ConfigEntityObject().douyin_cookie
     if "douyin.com/video/" in link:
         aweme_id = link.replace("https://www.douyin.com/video/","").split("?")[0].replace("/","")
         return await video_detail(aweme_id, user_agent, cookie)

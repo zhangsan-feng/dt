@@ -60,7 +60,7 @@ const DownloadPreview = ()=>{
     const [hasMore, setHasMore] = useState(true);
     const debounceTimer = useRef(null);
 
-    const tableHeight = AdaptiveHeight()
+    const adapterHeight = AdaptiveHeight()
 
     const loadMoreData = ()=>{
         if (!hasMore){return}
@@ -126,7 +126,7 @@ const DownloadPreview = ()=>{
 
     return (
 
-        <div className="preview-container"  ref={containerRef} style={{height:tableHeight}}>
+        <div className="preview-container"  ref={containerRef} style={{height:adapterHeight}}>
             <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="masonry-grid"

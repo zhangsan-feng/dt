@@ -2,7 +2,7 @@ import asyncio
 
 from _platform.hongshu.hongshu_detail import hongshu_detail
 from _platform.hongshu.hongshu_post import hongshu_post
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
 from utils.http_utls import HttpRequest
 
 async def hongshu_adapter(link, user_agent):
@@ -20,7 +20,7 @@ async def hongshu_adapter(link, user_agent):
         print(response.url)
         link = str(response.url)
 
-    config = Config()
+    config = ConfigEntityObject()
 
     if "xiaohongshu.com/explore/" in link:
         await hongshu_detail(link, user_agent, config.hongshu_cookie)

@@ -3,10 +3,10 @@ from _platform.weibo.weibo_feed import weibo_user_feed
 from _platform.weibo.weibo_home import weibo_user_home
 from _platform.weibo.weibo_image import weibo_user_image
 from _platform.weibo.weibo_video import weibo_user_video
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
 
 async def weibo_adapter(link, user_agent):
-    c = Config()
+    c = ConfigEntityObject()
 
     if link in "https://weibo.com/tv/show/":
         pass

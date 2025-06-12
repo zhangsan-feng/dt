@@ -24,33 +24,33 @@ const MenuItems = [
     },
     {
         key: '3',
-        icon: <DownloadOutlined />,
-        label: <Link to="/download_batch">批量下载</Link> ,
-        path:"/download_batch",
-        cn:"批量下载",
-
-    },
-    {
-        key: '4',
         icon: <SettingOutlined />,
         label: <Link to="/download_settings">下载配置</Link> ,
         path:"/download_settings",
         cn:"下载配置"
     },
     {
-        key: '5',
+        key: '4',
         icon: <ClockCircleOutlined />,
         label: <Link to="/download_record">下载记录</Link> ,
         path:"/download_record",
         cn:"下载记录"
     },
     {
-        key: '6',
+        key: '5',
         icon: <VideoCameraAddOutlined />,
         label: <Link to="/download_preview">下载预览</Link> ,
         path:"/download_preview",
         cn:"下载预览"
     },
+    {
+        key: '6',
+        icon: <ToolOutlined />,
+        label: <Link to="/download_cron">定时下载</Link> ,
+        path:"/download_cron",
+        cn:"定时下载"
+    },
+
     {
         key: '7',
         icon: <ToolOutlined />,
@@ -58,6 +58,7 @@ const MenuItems = [
         path:"/other_function",
         cn:"其他功能"
     },
+
 ]
 
 export {MenuItems}

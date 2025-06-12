@@ -1,11 +1,21 @@
-import os
+
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from routers import api_router
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
+from application.api.config_api import router as config_api_router
+from application.api.preview_api import router as preview_api_router
+from application.api.link_analysis_api import router as link_analysis_router
+from application.api.process_api import router as process_api_router
+from application.api.record_api import router as record_api_router
 
+api_router = APIRouter()
+api_router.include_router(config_api_router)
+api_router.include_router(link_analysis_router)
+api_router.include_router(preview_api_router)
+api_router.include_router(process_api_router)
+api_router.include_router(record_api_router)
 
 app = FastAPI()
 
@@ -15,7 +25,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["Range"]
 )
-config = Config()
+config = ConfigEntityObject()
+
 app.mount(
     "/download",
     StaticFiles(directory=config.save_path, check_dir=False),
@@ -26,10 +37,6 @@ app.include_router(api_router, prefix="/api")
 
 if __name__ == '__main__':
 
-    
-    # os.remove("./store.duckdb")
-    # from application.db import DuckDBConfigure
-    # DuckDBConfigure().init_duckdb()
     uvicorn.run('main:app', host=config.host, port=config.port)
 
 """

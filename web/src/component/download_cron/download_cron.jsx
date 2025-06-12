@@ -1,29 +1,18 @@
 import {Input, Table, message, Button, Tag} from 'antd';
-import {useEffect, useLayoutEffect, useRef, useState} from 'react'
+import {useEffect,  useState} from 'react'
 import {DownLoadBatchAddApi, DownLoadBatchDelApi, DownLoadBatchQueryApi, DownLoadBatchStartApi} from '../../api/api'
-
+import AdaptiveHeight from "../adaptive_height_hook";
 
 const { Search } = Input;
 
 
-const DownloadBatch = ()=>{
+const DownloadCron = ()=>{
 
     const [dataSource, setDataSource] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageTotal, setPageTotal] = useState(1);
+    const adapterHeight = AdaptiveHeight()
 
-    const [tableHeight, setTableHeight] = useState(() => {
-        const content = document.getElementById("layout-content");
-        return content ? content.clientHeight - 240 : 500;
-    });
-    useLayoutEffect(() => {
-        const handleResize = () => {
-            const content = document.getElementById("layout-content");
-            if (content) {setTableHeight(content.clientHeight - 240);}
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {window.removeEventListener('resize', handleResize);};
-    }, []);
 
     const QueryData = (page=currentPage)=>{
         DownLoadBatchQueryApi({"page":page}).then(res=>{
@@ -63,11 +52,10 @@ const DownloadBatch = ()=>{
         <div style={{width:"100%",height:"100%"}} >
             <div style={{display:'flex',}}>
                 <Search placeholder="添加链接" onSearch={Submit} enterButton="提交" style={{width:400}}/>
-                {/*<Search placeholder="搜索"    onSearch={Submit} enterButton="搜索" style={{width:400, marginLeft:20}}/>*/}
                 <Button color="cyan" variant="solid" style={{marginLeft:20, width:100}} onClick={()=>{
                     DownLoadBatchStartApi().then(res=>{message.warning({content: res.data}).then()})
                 }}>
-                    开始批量下载
+                    开始任务
                 </Button>
             </div>
             <div style={{marginTop:20}}>
@@ -78,7 +66,7 @@ const DownloadBatch = ()=>{
                             <Table dataSource={dataSource}
                                    columns={columns}
                                    rowKey="id"
-                                   scroll={{y: tableHeight}}
+                                   scroll={{y: adapterHeight}}
                                    pagination={{pageSize:100, total:pageTotal}}
                                    onChange={tableChangeHandler}
                             />
@@ -92,4 +80,4 @@ const DownloadBatch = ()=>{
 }
 
 
-export default DownloadBatch
+export default DownloadCron

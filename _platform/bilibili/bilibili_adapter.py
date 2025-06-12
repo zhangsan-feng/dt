@@ -3,10 +3,10 @@ import asyncio
 from _platform.bilibili.bilibili_detail import bilibili_detail
 from _platform.bilibili.bilibili_live import bilibili_live
 from _platform.bilibili.bilibili_post import bilibili_post
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
 
 async def bilibili_adapter(link, user_agent):
-    config = Config()
+    config = ConfigEntityObject()
 
     if "live.bilibili.com" in link:
         await bilibili_live(link, user_agent)

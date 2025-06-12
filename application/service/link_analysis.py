@@ -10,8 +10,8 @@ async def link_analysis(link, user_agent):
     uuid = str(uuid4())
     try:
         if "douyin" in link:
-            # await douyin_adapter(link, user_agent)
-            await create(douyin_adapter(link, user_agent), uuid, link)
+            await douyin_adapter(link, user_agent)
+            # await create(douyin_adapter(link, user_agent), uuid, link)
 
         if "bilibili" in link:
             # await bilibili_adapter(link, user_agent)
@@ -25,3 +25,23 @@ async def link_analysis(link, user_agent):
             await create(weibo_adapter(link, user_agent), uuid, link)
     except Exception as e:
         print(e)
+
+
+if __name__ == '__main__':
+    # import asyncio
+    # from utils import match_url
+    # with open("../../download.txt", "r", encoding="utf-8") as f:
+    #     content = f.readlines()
+    # for url in content:
+    #     link = match_url(url)
+    #     if link:
+    #         print(link)
+
+    # asyncio.run(
+    #     link_analysis(
+    #         "",
+    #         ""
+    #     )
+    # )
+
+    pass

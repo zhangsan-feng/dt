@@ -1,14 +1,15 @@
 import json
 
-from fastapi import Request
+from fastapi import Request, APIRouter
 import os
-from config import Config
+from application.entity.config_entity import ConfigEntityObject
+router = APIRouter()
 
-
+@router.get("/preview")
 async def preview_api(request: Request):
     page = request.query_params.get("page")
     page = int(page) if page else 1
-    config = Config()
+    config = ConfigEntityObject()
     file_list = []
     for root, dirs, files in os.walk(config.save_path):
         for file in files:

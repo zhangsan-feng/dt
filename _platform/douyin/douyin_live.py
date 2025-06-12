@@ -34,7 +34,7 @@ async def web(headers, room_id):
     }
     params["a_bogus"] = ABogus(headers["user-agent"]).get_value(params)
     response = await HttpRequest(url, headers).httpx_get(params)
-    # print(response.text)
+    print(response.text)
 
     response_body = response.json()
     print(response_body)

@@ -62,9 +62,33 @@ def generate_random_upper_string(length):
     return ''.join(random.choice(characters) for _ in range(length))
 
 
-# if __name__ == '__main__':
-#     get_cookie_key(
-#         ""
-#         "UIFID"
-#         # "s_v_web_id"
-#     )
+
+def file_rename(directory):
+
+    def contains_chinese(text):
+        return any('\u4e00' <= char <= '\u9fff' for char in text)
+
+    try:
+        index = 0
+        for root, _, files in os.walk(directory):
+            for file in files:
+                old_file_path = os.path.join(root, file)
+                # if contains_chinese(file):
+                filename, ext = os.path.splitext(file)
+                new_filename = "file_" +  str(index) + ext.lower()
+                new_file_path = os.path.join(root, new_filename)
+                os.rename(old_file_path, new_file_path)
+                print(f"重命名: {old_file_path} -> {new_file_path}")
+                index += 1
+    except Exception as e:
+        print(f"处理过程中发生错误: {e}")
+
+
+if __name__ == '__main__':
+    # get_cookie_key(
+    #     ""
+    #     "UIFID"
+    #     # "s_v_web_id"
+    # )
+
+    pass

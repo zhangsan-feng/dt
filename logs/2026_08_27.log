@@ -1,0 +1,70 @@
+2026-08-27 13:46:16,663 INFO a_bogus.py:94 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=7 length=188
+2026-08-27 13:46:47,385 INFO a_bogus.py:94 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=12 length=188
+2026-08-27 13:47:14,659 INFO a_bogus.py:94 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 13:49:01,981 INFO a_bogus.py:94 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 14:49:30,564 INFO douyin_detail.py:11 Douyin detail request started aweme_id=7470885299535629622
+2026-08-27 14:49:31,862 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 14:49:32,334 INFO douyin_detail.py:65 Douyin detail response aweme_id=7470885299535629622 status=200 content_type=text/plain; charset=utf-8 body_length=0
+2026-08-27 14:57:21,388 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 15:07:25,712 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 15:08:17,061 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 15:08:47,547 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 15:09:56,790 INFO a_bogus.py:93 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 15:12:09,231 INFO a_bogus.py:100 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=196
+2026-08-27 15:12:44,559 INFO a_bogus.py:100 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=196
+2026-08-27 15:23:18,872 INFO a_bogus.py:100 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=196
+2026-08-27 15:52:05,985 INFO a_bogus.py:100 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 16:23:07,911 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7626423682646326117 status=200 content_type=application/json body_length=121539 a_bogus_length=180 sec_sdk=True
+2026-08-27 16:23:34,711 INFO douyin_detail.py:88 Douyin detail request started aweme_id=7626423682646326117
+2026-08-27 16:23:35,746 INFO ms_token.py:51 Douyin msToken response status=200 content_type=text/plain; charset=utf-8 token_present=True
+2026-08-27 16:23:35,828 INFO a_bogus.py:102 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 16:23:36,246 INFO douyin_detail.py:152 Douyin pure detail response aweme_id=7626423682646326117 status=200 content_type=text/plain; charset=utf-8 body_length=0 valid=False
+2026-08-27 16:23:36,246 WARNING douyin_detail.py:161 Douyin pure detail response rejected; switching to browser capture aweme_id=7626423682646326117
+2026-08-27 16:23:39,802 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7626423682646326117 status=200 content_type=application/json body_length=121437 a_bogus_length=180 sec_sdk=True
+2026-08-27 16:25:13,826 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7626423682646326117 status=200 content_type=application/json body_length=119101 a_bogus_length=180 sec_sdk=True
+2026-08-27 16:25:21,914 INFO douyin_detail.py:92 Douyin detail request started aweme_id=7626423682646326117
+2026-08-27 16:25:22,849 INFO ms_token.py:51 Douyin msToken response status=200 content_type=text/plain; charset=utf-8 token_present=True
+2026-08-27 16:25:22,923 INFO a_bogus.py:106 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 16:25:23,359 INFO douyin_detail.py:156 Douyin pure detail response aweme_id=7626423682646326117 status=200 content_type=text/plain; charset=utf-8 body_length=0 valid=False
+2026-08-27 16:25:23,359 WARNING douyin_detail.py:165 Douyin pure detail response rejected; switching to browser capture aweme_id=7626423682646326117
+2026-08-27 16:25:26,893 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7626423682646326117 status=200 content_type=application/json body_length=119093 a_bogus_length=180 sec_sdk=True
+2026-08-27 16:28:01,215 INFO douyin_detail.py:92 Douyin detail request started aweme_id=7637427156469064447
+2026-08-27 16:28:02,114 INFO ms_token.py:51 Douyin msToken response status=200 content_type=text/plain; charset=utf-8 token_present=True
+2026-08-27 16:28:02,186 INFO a_bogus.py:106 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=188
+2026-08-27 16:28:02,596 INFO douyin_detail.py:156 Douyin pure detail response aweme_id=7637427156469064447 status=200 content_type=text/plain; charset=utf-8 body_length=0 valid=False
+2026-08-27 16:28:02,597 WARNING douyin_detail.py:165 Douyin pure detail response rejected; switching to browser capture aweme_id=7637427156469064447
+2026-08-27 16:28:06,761 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44202 a_bogus_length=180 sec_sdk=True
+2026-08-27 16:30:11,002 INFO douyin_detail.py:92 Douyin detail request started aweme_id=7637427156469064447
+2026-08-27 16:30:12,761 INFO ms_token.py:51 Douyin msToken response status=200 content_type=text/plain; charset=utf-8 token_present=True
+2026-08-27 16:30:12,823 INFO a_bogus.py:106 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 16:30:13,730 INFO douyin_detail.py:156 Douyin pure detail response aweme_id=7637427156469064447 status=200 content_type=text/plain; charset=utf-8 body_length=0 valid=False
+2026-08-27 16:30:13,730 WARNING douyin_detail.py:165 Douyin pure detail response rejected; switching to browser capture aweme_id=7637427156469064447
+2026-08-27 16:30:18,338 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44205 a_bogus_length=188 sec_sdk=True
+2026-08-27 16:44:54,771 INFO douyin_detail.py:110 Douyin detail request started aweme_id=7637427156469064447
+2026-08-27 16:44:55,896 INFO douyin_detail.py:99 Douyin minimal detail response aweme_id=7637427156469064447 status=200 content_type=application/json body_length=43639 valid=True
+2026-08-27 16:45:44,451 INFO douyin_adapter.py:33 Douyin share link resolved status=302 target=https://www.iesdouyin.com/share/note/7637427156469064447/
+2026-08-27 16:45:44,457 INFO douyin_detail.py:111 Douyin detail request started aweme_id=7637427156469064447
+2026-08-27 16:45:45,138 INFO douyin_detail.py:100 Douyin minimal detail response aweme_id=7637427156469064447 status=200 content_type=application/json body_length=43640 valid=True
+2026-08-27 16:46:51,478 INFO douyin_adapter.py:33 Douyin share link resolved status=302 target=https://www.iesdouyin.com/share/note/7637427156469064447/
+2026-08-27 16:46:51,483 INFO douyin_detail.py:111 Douyin detail request started aweme_id=7637427156469064447
+2026-08-27 16:46:52,419 INFO douyin_detail.py:100 Douyin minimal detail response aweme_id=7637427156469064447 status=200 content_type=application/json body_length=0 valid=False
+2026-08-27 16:46:54,413 INFO ms_token.py:51 Douyin msToken response status=200 content_type=text/plain; charset=utf-8 token_present=True
+2026-08-27 16:46:54,473 INFO a_bogus.py:106 Douyin a_bogus generated endpoint=https://www.douyin.com/aweme/v1/web/aweme/detail/ params=36 length=184
+2026-08-27 16:46:55,414 INFO douyin_detail.py:185 Douyin pure detail response aweme_id=7637427156469064447 status=200 content_type=text/plain; charset=utf-8 body_length=0 valid=False
+2026-08-27 16:46:58,935 INFO browser_detail.py:84 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44202 a_bogus_length=184 sec_sdk=True
+2026-08-27 16:56:30,959 INFO browser_detail.py:79 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44203 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:03:05,044 INFO douyin_adapter.py:38 Douyin share link resolved status=302 target=https://www.iesdouyin.com/share/note/7637427156469064447/
+2026-08-27 17:03:09,085 INFO browser_detail.py:79 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44182 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:03:09,085 INFO douyin_adapter.py:74 Douyin browser adapter received detail aweme_id=7637427156469064447 source=browser
+2026-08-27 17:03:33,571 INFO douyin_adapter.py:38 Douyin share link resolved status=302 target=https://www.iesdouyin.com/share/note/7637427156469064447/
+2026-08-27 17:03:36,811 INFO browser_detail.py:79 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44191 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:03:36,811 INFO douyin_adapter.py:74 Douyin browser adapter received detail aweme_id=7637427156469064447 source=browser
+2026-08-27 17:12:30,445 INFO douyin_adapter.py:41 Douyin share link resolved status=302 target=https://www.iesdouyin.com/share/note/7637427156469064447/
+2026-08-27 17:12:35,016 INFO browser_detail.py:79 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44187 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:12:35,016 INFO douyin_adapter.py:76 Douyin browser adapter received detail aweme_id=7637427156469064447 source=browser
+2026-08-27 17:17:41,460 INFO browser_detail.py:79 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44689 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:32:17,901 INFO browser_detail.py:34 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44188 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:33:32,471 INFO browser_detail.py:34 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44187 a_bogus_length=180 sec_sdk=True
+2026-08-27 17:34:07,778 INFO browser_detail.py:34 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44185 a_bogus_length=176 sec_sdk=True
+2026-08-27 17:40:19,387 INFO douyin_adapter.py:84 Douyin share link redirected status=302 header_count=14
+2026-08-27 20:49:35,449 INFO douyin_adapter.py:73 Douyin share link redirected status=200 header_count=1

@@ -1,0 +1,66 @@
+2026-08-28 09:58:13,671 INFO browser_detail.py:60 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=43310 a_bogus_length=180 sec_sdk=True
+2026-08-28 10:05:37,560 INFO browser_detail.py:59 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44187 a_bogus_length=180 sec_sdk=True
+2026-08-28 10:06:39,651 INFO browser_detail.py:59 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44187 a_bogus_length=180 sec_sdk=True
+2026-08-28 10:44:38,377 INFO browser_detail.py:59 Douyin browser detail captured aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44192 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:17:46,109 ERROR browser.py:151 Browser bridge timed out script=browser_request_listener.mjs
+2026-08-28 13:18:33,632 ERROR browser.py:151 Browser bridge timed out script=browser_request_listener.mjs
+2026-08-28 13:19:45,379 INFO browser_detail.py:123 Douyin browser signature Python detail aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44659 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:21:41,804 ERROR browser.py:151 Browser bridge timed out script=browser_request_listener.mjs
+2026-08-28 13:22:26,762 ERROR browser.py:151 Browser bridge timed out script=browser_request_listener.mjs
+2026-08-28 13:34:51,036 INFO browser.py:292 Browser generated a_bogus length=180
+2026-08-28 13:34:51,036 INFO browser_detail.py:80 Douyin browser a_bogus generated aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 length=180
+2026-08-28 13:36:13,709 ERROR browser.py:151 Browser bridge timed out script=browser_a_bogus.mjs
+2026-08-28 13:47:37,957 INFO browser.py:292 Browser generated a_bogus length=180
+2026-08-28 13:47:37,957 INFO browser_detail.py:80 Douyin browser a_bogus generated aweme_id=7626423682646326117 source_aweme_id=7637427156469064447 length=180
+2026-08-28 13:47:48,099 INFO browser.py:292 Browser generated a_bogus length=180
+2026-08-28 13:47:48,100 INFO browser_detail.py:80 Douyin browser a_bogus generated aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 length=180
+2026-08-28 13:52:01,711 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44184 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:34,272 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44188 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:37,991 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7643044481902686307 source_aweme_id=7643044481902686307 status=200 content_type=application/json body_length=61875 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:42,194 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7645269734778420210 source_aweme_id=7645269734778420210 status=200 content_type=application/json body_length=75247 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:45,730 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7644955644269635185 source_aweme_id=7644955644269635185 status=200 content_type=application/json body_length=58574 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:49,264 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7654419817156188646 source_aweme_id=7654419817156188646 status=200 content_type=application/json body_length=73225 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:55:52,759 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7647179529207101562 source_aweme_id=7647179529207101562 status=200 content_type=application/json body_length=58492 a_bogus_length=180 sec_sdk=True
+2026-08-28 13:56:08,242 INFO browser_detail.py:101 Douyin browser detail response aweme_id=7637410157160769251 source_aweme_id=7637410157160769251 status=200 content_type=application/json body_length=65865 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:00:18,853 INFO browser_detail.py:87 Douyin browser a_bogus generated aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 length=180
+2026-08-28 14:00:31,965 INFO browser_detail.py:87 Douyin browser a_bogus generated aweme_id=7626423682646326117 source_aweme_id=7637427156469064447 length=180
+2026-08-28 14:00:42,431 INFO browser_detail.py:108 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44211 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:04:51,311 INFO browser_detail.py:118 Douyin browser a_bogus generated path=/aweme/v1/web/aweme/detail/ override_aweme_id=False length=180
+2026-08-28 14:05:03,909 INFO browser_detail.py:118 Douyin browser a_bogus generated path=/aweme/v1/web/aweme/post/ override_aweme_id=False length=180
+2026-08-28 14:05:17,945 INFO browser_detail.py:118 Douyin browser a_bogus generated path=/aweme/v1/web/user/profile/other/ override_aweme_id=False length=180
+2026-08-28 14:25:37,914 INFO browser_detail.py:115 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44215 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:27:31,905 ERROR browser.py:157 Browser bridge failed script=browser_detail_capture.mjs returncode=1 stdout_length=0 stderr_length=296
+2026-08-28 14:33:56,619 INFO browser_detail.py:114 Douyin browser detail response aweme_id=7626423682646326117 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=121497 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:34:23,190 INFO browser_detail.py:114 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7626423682646326117 status=200 content_type=application/json body_length=44213 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:45:36,872 INFO browser_detail.py:103 Douyin browser detail response aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44215 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:51:16,829 INFO browser_detail.py:116 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7626423682646326117 status=200 content_type=application/json body_length=44210 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:51:28,532 INFO browser_detail.py:116 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44217 a_bogus_length=180 sec_sdk=True
+2026-08-28 14:59:47,980 INFO browser_detail.py:155 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7626423682646326117 status=200 content_type=application/json body_length=44213 a_bogus_length=180 sec_sdk=True
+2026-08-28 15:00:02,185 INFO browser_detail.py:132 Douyin browser a_bogus generated path=/aweme/v1/web/aweme/detail/ override_aweme_id=False length=180
+2026-08-28 15:02:50,204 INFO browser_detail.py:160 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7626423682646326117 status=200 content_type=application/json body_length=44188 a_bogus_length=180 sec_sdk=True
+2026-08-28 15:03:04,252 INFO browser_detail.py:137 Douyin browser a_bogus generated path=/aweme/v1/web/aweme/detail/ replacement_count=1 length=180
+2026-08-28 15:19:05,727 INFO douyin_detail_browser.py:161 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44185 a_bogus_length=184 sec_sdk=True
+2026-08-28 15:25:10,737 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44190 a_bogus_length=184 sec_sdk=True
+2026-08-28 15:26:32,813 INFO browser_request_capture.py:126 Browser a_bogus generated path=/aweme/v1/web/aweme/detail/ replacement_count=0 length=188
+2026-08-28 15:26:35,203 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44187 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:29:24,345 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7637427156469064447 source_aweme_id=7637427156469064447 status=200 content_type=application/json body_length=44189 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:29:45,865 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7643044481902686307 source_aweme_id=7643044481902686307 status=200 content_type=application/json body_length=57472 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:29:57,911 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7637410157160769251 source_aweme_id=7637410157160769251 status=200 content_type=application/json body_length=66389 a_bogus_length=184 sec_sdk=True
+2026-08-28 15:30:12,108 ERROR browser.py:157 Browser bridge failed script=browser_request.mjs returncode=1 stdout_length=0 stderr_length=419
+2026-08-28 15:30:57,752 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7645269734778420210 source_aweme_id=7645269734778420210 status=200 content_type=application/json body_length=75249 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:31:10,669 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7644955644269635185 source_aweme_id=7644955644269635185 status=200 content_type=application/json body_length=58590 a_bogus_length=184 sec_sdk=True
+2026-08-28 15:31:42,742 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7654419817156188646 source_aweme_id=7654419817156188646 status=200 content_type=application/json body_length=71032 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:31:55,652 INFO douyin_detail_browser.py:86 Douyin browser detail response aweme_id=7647179529207101562 source_aweme_id=7647179529207101562 status=200 content_type=application/json body_length=64580 a_bogus_length=188 sec_sdk=True
+2026-08-28 15:41:30,139 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk max_cursor=None status=200 item_count=21 body_length=2807519
+2026-08-28 15:42:05,042 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk max_cursor=None status=200 item_count=21 body_length=2866709
+2026-08-28 15:42:05,042 INFO douyin_post_browser.py:102 Douyin browser post handled sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk item_count=21
+2026-08-28 15:43:08,935 ERROR browser.py:151 Browser bridge timed out script=browser_detail_capture.mjs
+2026-08-28 15:43:56,537 ERROR browser.py:151 Browser bridge timed out script=browser_detail_capture.mjs
+2026-08-28 15:46:03,088 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk max_cursor=None status=200 item_count=21 body_length=2807759
+2026-08-28 15:46:40,097 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk max_cursor=None status=200 item_count=21 body_length=2866041
+2026-08-28 15:47:22,054 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAeRcYu7tTuRg1cQrbLYXsD7ogs0AtUSTM__rgb1lk6bk max_cursor=None status=200 item_count=21 body_length=2842547
+2026-08-28 15:47:31,333 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAA3nZWMFY7d-1ffxBxw_NWXnBJ-gAucmqfuovc7C6AocI max_cursor=None status=200 item_count=21 body_length=2069913
+2026-08-28 15:47:39,778 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAA3XNy70giFoK4bZR8JKmEZrkyI66yAsQvv1UROAILi24 max_cursor=None status=200 item_count=21 body_length=1922341
+2026-08-28 15:47:50,367 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAlZuXpbX_sfm-aIqCZnun7hkDAoaL1j1h4yu0tEs-yd8 max_cursor=None status=200 item_count=18 body_length=1714387
+2026-08-28 15:48:00,557 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAMeTQRwXqRFQPWgwUX72o6fSVq6z5-0gcCpL5T3uKXIE max_cursor=None status=200 item_count=18 body_length=1285112
+2026-08-28 15:48:10,067 INFO douyin_post_browser.py:79 Douyin browser post response sec_user_id=MS4wLjABAAAAkveHAA4vWmCQRw_-A62QP1Xt7LQbj0yj4hVIgu_r06U max_cursor=None status=200 item_count=21 body_length=1328958

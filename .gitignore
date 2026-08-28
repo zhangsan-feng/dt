@@ -1,0 +1,11 @@
+.idea
+/download
+store.db
+__pycache/
+**/__pycache__/
+**/__pycache__/*
+**/*.pyc
+**/*.pyo
+**/*.pyd
+config.json
+/agent_tools

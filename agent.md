@@ -1,0 +1,66 @@
+# 当前工作记录
+
+- 当前任务：清理浏览器单独 `a_bogus` 提取链并移除详情抓取的持久化 Profile。
+- 已完成：确认当前详情、用户主页和纯算法签名均不依赖浏览器单独提取 `a_bogus`；已删除对应 MJS、Python 函数和公共导出，并同步更新 `project.md`。
+- 已验证：脚本不存在，源码无残留导入或调用；Python AST、公共包导入和剩余浏览器桥接脚本的 Node 语法检查均通过。
+- 最新调整：`browser_detail_capture.mjs` 不再启动持久化 Profile，始终使用临时隔离 Context；每次运行仍可通过 `DOUYIN_COOKIE` 注入抖音 Cookie，返回结果中的 `profileMode` 固定为 `isolated`。
+- 最新清理：已删除整个项目 `.runtime` 目录，包括旧 Profile 和 `js-reverse-mcp-cdp*` 运行目录；未保留本地浏览器运行状态。
+- 最新调整：`utils/browser_call_js.mjs`、`browser_request.mjs`、`browser_request_listener.mjs` 也已移除持久化 Profile，统一使用临时隔离 Context；详情桥接和通用桥接均不再依赖 `.runtime`。
+- 已完成：使用工作区 `js-reverse-mcp` 抓取详情 XHR，并对同一视频做 fresh capture；浏览器请求为 38/39 个 query 参数，包含 `a_bogus`、`timestamp` 和 `x-secsdk-web-signature`，返回 `200 application/json` 且包含 `aweme_detail`。
+- 已验证：将 MCP 抓到的完整 URL 和请求头用 Python `httpx` 重放成功（`200`、`status_code=0`、包含 `aweme_detail`）；删除 SecSDK 字段后仅换成纯算法 `a_bogus`，返回 `200 text/plain` 空体；保留旧 SecSDK 字段但替换 `a_bogus`，返回 `403 text/plain`。纯签名器本身可生成非空值，但当前不能独立通过详情接口。
+- 已验证：当前 Python `gen_detail_params_sign` 能调用纯签名器，但 `ms_token.gen_ms_token()` 实测没有返回 `x-ms-token`，所以生成参数还缺少浏览器请求中的有效 `msToken`；Windows 系统 `curl.exe`（Schannel）重放同一抓包返回 `SEC_E_NO_CREDENTIALS`、HTTP 状态 `000`，Python 重放不受此 TLS 传输问题影响。
+- 已完成静态分析：`Spider_Dy_comment/bdm.js` 的 `n.apply(d, e)` 是通用调用分发；条件命中时实际调用为 `URLSearchParams.prototype.append("a_bogus", 已生成值)`。算法主体在前面的压缩字节码、query/UA/屏幕指纹、payload 和 finalize 链路。
+- 浏览器自动化已迁移到 `_platform/douyin/browser_automation/`：`browser_detail.py` 负责 Python 桥接，`browser_detail_capture.mjs` 负责 Patchright 抓取；详情入口当前已按用户要求回退，不自动调用该目录。
+- 迁移验证：新目录导入和 Node 语法检查通过；使用 aweme_id `7637427156469064447` 实际抓取返回 `200 application/json`，包含 `aweme_detail`、`a_bogus` 和 SecSDK 字段。
+- 已完成修正：纯签名器支持完整 screen JSON；Python 不再把 `None` 编码为字符串，自动去除旧签名字段；Cookie 优先复用 `msToken/UIFID/s_v_web_id`；msToken 响应支持 `x-ms-token` 和 Set-Cookie，修复 `sec-ch-ua-platform` 字段，并增加脱敏日志。
+- 已验证：真实 `aweme_id=7626423682646326117` 的浏览器抓取为 `200 application/json`，含 `aweme_detail`、`a_bogus` 和 SecSDK 签名；应用 `video_detail` 入口已成功将详情传入业务处理层。验证时拦截了媒体下载，没有产生下载副作用。
+- 使用说明：Node.js、`js-reverse-mcp/node_modules/@zhizhuodemao/patchright` 和 Chrome 可用时，直接从应用入口传入抖音视频/图文链接即可；可设置 `DOUYIN_BROWSER_HEADLESS=true` 以无头运行，详情抓取每次使用隔离浏览器环境并可通过 `DOUYIN_COOKIE` 注入 Cookie。
+- 下载模式修正：`application/entity/config_entity.py` 默认关闭 `only_audio/only_video/only_image`，因此详情中的 MP3、MP4、PNG 都会下载；如需单独下载某一类，将对应开关设为 `True`。
+- 纯接口验证：最小 detail 请求已实测可返回 `200 application/json` 和 `aweme_detail`，因此正常情况下不会启动 Patchright；浏览器仅保留为最后兜底。
+- 接口优先开关：设置 `DOUYIN_HTTP_ONLY=true` 可禁止浏览器兜底；短链接解析日志只记录状态和目标路径，不再打印完整跳转参数。
+- 最新验证：对 `https://v.douyin.com/OCFtqmB1deE/` 开启 `DOUYIN_HTTP_ONLY=true` 后，短链接解析到 aweme_id `7637427156469064447`，最小纯 HTTP detail 返回 `200 application/json`，业务层收到详情数据，未启动 Patchright。
+- 用户最新要求：回退 `_platform/douyin/douyin_detail.py`；该文件已恢复为 Git `HEAD` 内容，当前仅可能保留文件末尾换行差异，无业务代码差异。其它签名/浏览器辅助文件未删除。
+- 适配器分流：`_platform/douyin/douyin_adapter.py` 对外只保留 `douyin_adapter_api` 和 `douyin_adapter_browser`；视频、笔记、图集直接调用 `_platform/douyin/browser_automation`，其它链接继续走 `douyin_adapter_api`。未改动 `link_analysis.py`，旧导入名通过适配器模块内部兼容映射处理。
+- 兼容修正：工作区已有 `_platform/douyin/data_handler/` 拆分，根包此前未导出处理函数；已在 `_platform/douyin/__init__.py` 恢复 `douyin_data_handler` 和 `douyin_live_handler` 导出，避免 API/适配器导入失败。
+- 最新验证：`douyin_adapter_browser` 可处理 `https://v.douyin.com/OCFtqmB1deE/`，解析到 aweme_id `7637427156469064447`，浏览器 detail 返回 200 JSON，详情成功传入数据处理器。
+- 最新改动：新增 `utils/browser.py` 的通用 Browser 桥接对象，统一处理 Node/Patchright 脚本执行、超时、无头模式、日志、JSON 解析和 requestHeaders 提取；`_platform/douyin/browser/browser_detail.py` 已改为复用该对象。
+- 最新验证：`Browser.headers_from_result` 静态提取检查通过；真实浏览器抓取 aweme_id=7637427156469064447 返回 200 application/json，包含 aweme_detail、9 个请求头和长度 180 的 a_bogus。
+- 最新改动：`utils.browser.Browser` 新增并定名为 `redirect_request` 的异步方法，默认不跟随重定向，返回 status_code、url、redirect_url、location 和响应 headers。
+- 最新接入：`_platform/douyin/douyin_adapter.py` 的 `v.douyin.com` 分支已调用 `Browser.redirect_request`，读取重定向链接后继续原有 API 详情流程；实际短链接验证解析出 aweme_id=7637427156469064447。
+- 最新接入：在用户已保留的 `douyin_adapter_browser` 路由中，仅将视频、笔记、图集分支的详情请求替换为 `_fetch_detail_with_browser`，并将 `aweme_detail` 和浏览器请求头传给现有数据处理器；未修改 `link_analysis.py`。
+- 最新重构：`utils/browser.py` 的内嵌浏览器 JS 已迁移到 `utils/browser_request.mjs`；`BrowserObject.browser_call_js` 使用 `asyncio.create_subprocess_exec` 异步执行 Node.js 脚本，已移除 `run`、`run_async`、`redirect_request` 和 `get_headers`。
+- 最新功能：`BrowserObject.browser_request(url)` 调用通用浏览器脚本访问 URL，并将主请求和主响应记录到 `self.request`、`self.response`，对象可直接读取请求头、请求体、响应头和响应体。
+- 最新验证：`browser_call_js` 执行 `pure_a_bogus.js` 成功；`browser_request("https://example.com")` 实际通过 Node/Chrome 返回 `GET 200`，成功记录请求头、响应头和响应体；Python 与 Node 语法检查均通过。
+- 最新验证：适配器导入、Python 语法检查和内存 fake 浏览器的短链重定向/默认请求头传递校验均通过。
+- 最新改动：`utils.browser.BrowserObject.browser_call_js(url, script_path, args)` 已调整为打开目标页面后，使用 `page.evaluate()` 在浏览器页面上下文执行 JS 函数文件；JS 文件需要返回函数表达式。
+- 最新改动：新增 `BrowserObject.browser_request_listener(url, response_url)`，由固定的 `utils/browser_request_listener.mjs` 注册 `page.on("response")`，监听匹配 URL 的响应并返回请求、响应头、响应体，同时更新 `BrowserObject.request/response`。
+- 最新接入：`_platform/douyin/browser/browser_detail.py` 改为监听 `/aweme/v1/web/aweme/detail/`，从通用响应体解析 `aweme_detail` 和签名信息，不再调用已移除的 `run_async`。
+- 最新验证：`browser_request_listener("https://example.com", "https://example.com/")` 返回 200；`browser_call_js` 在浏览器中读取页面 h1 返回 `Example Domain`；抖音 aweme_id `7637427156469064447` 返回 200 JSON，包含 `aweme_detail`，`a_bogus` 长度 180，SecSDK 签名存在。
+- 本次未新增测试用例，已完成 Python AST 和 Node `--check` 语法检查及实际浏览器验证。当前仍有与本次拆分无关的旧调用：`_platform/douyin/douyin_adapter.py` 使用 `redirect_request`，且 `_adapter_headers` 未定义，待后续单独处理。
+- 最新调整：`browser_request` 和 `browser_request_listener` 均改为 `url, *args, **kwargs`，扩展参数会转为桥接脚本选项；两者都记录 `BrowserObject.request/response`，不再接收 `environment`，Cookie 直接读取持久化浏览器配置。
+- 最新调整：抖音浏览器详情不再从 Python 传递 Cookie 参数，`fetch_detail_with_browser` 改为只接收 `aweme_id`；适配器仍可读取配置 Cookie，仅用于后续数据处理头部兜底。
+- 历史调整（通用 `utils` 浏览器桥接工具）：选择 Profile 时按 `BROWSER_PROFILE`、`DOUYIN_BROWSER_PROFILE`、默认 `.runtime/browser-profile` 的顺序回退，监听/主请求不再手动添加 Cookie；当前抖音详情桥接已改为隔离 Context。
+- 最新验证：在 Profile 回退调整后，`browser_call_js` 页面执行、`browser_request` 主请求记录、`browser_request_listener` 响应监听记录均返回 200；抖音详情仍返回 `aweme_detail`、`a_bogus` 长度 180 和 SecSDK 签名。
+- 最新调整：`douyin_adapter_browser` 不再读取配置 Cookie 或手动补充 `headers['cookie']`，详情处理器直接接收浏览器监听结果中的 `requestHeaders`；`douyin_adapter_api` 的纯 HTTP 请求头逻辑保持不变。
+- 最新验证：实际调用 `douyin_adapter_browser` 时，数据处理器收到 8 个浏览器请求头，Cookie 由浏览器 Profile 自然携带，User-Agent 为浏览器实际的 HeadlessChrome UA，没有使用传入的自定义 UA。
+- 本次定位：确认用户所说的 XML 对象是通用 `XMLHttpRequest`。`Spider_Dy_comment/bdm.js` 中 `D(t,r)`（6358 行）创建 wrapper，`return X(e, this, arguments, r)`（6362 行）是 BDM VM 入口，`X` 再进入 `d()` 字节码解释器；6442 行的 `n.apply(d, e)` 只是通用 native 调用分发。
+- 本次定位：当前 1.0.1.19 VM handler 的字节码长度为 238。按运行时断点，`a === 150` 是签名函数返回值写入 `s[9]` 前的生成调用，输入为 URL query 序列化结果和请求上下文；`a === 168` 是 `URLSearchParams.append("a_bogus", s[9])` 的最终写入点。`s[3]` 为 `XMLHttpRequest`，请求会经过 `_vc_intercepted`/`bdmsInvokeList`，detail、comment、count 等 XHR 共用该入口。
+- 最新方向修正：浏览器只负责生成并返回 `a_bogus`，Python 不再重放浏览器完整请求，也不接收 URL、Cookie、请求头或响应体。
+- 最新实现：`_platform/douyin/browser/browser_a_bogus.mjs` 使用 `js-reverse-mcp/node_modules/@zhizhuodemao/patchright` 启动持久化 Profile，在 `page.on("request")` 中只匹配 detail 请求的 `a_bogus`；`browser_detail.py` 负责调用，通用 `utils/browser.py` 只提供 `run_bridge_json()`。
+- 最新 hook：传入 `browser_aweme_id` 时，通过 `page.addInitScript` 在页面初始化前对 `XMLHttpRequest.open` 的 detail URL 做原始字符串替换，只修改 `aweme_id`，保持页面自己的 BDM/XHR 生成链；不再手工 new XHR。
+- 最新入口：`_platform/douyin/browser/browser_detail.py` 新增 `generate_a_bogus_with_browser(aweme_id, browser_aweme_id=None)`；普通 ID 和 hook 覆盖 ID 均已实际验证返回非空、长度 180。下一步由调用方自行拼装 Python 请求参数。
+- 最新详情验证：`fetch_detail_with_browser("7637427156469064447")` 已实际在浏览器内监听 detail 响应，返回 `200 application/json`，包含 `aweme_detail`，响应中的 aweme_id 与请求一致；当前不需要 Python 重放详情请求。
+- 最新目录调整：抖音专用 `browser_a_bogus.mjs` 已从 `utils/` 移到 `_platform/douyin/browser/`；通用 `BrowserObject` 通过 `run_bridge_json()` 执行指定桥接脚本。迁移后普通 a_bogus、hook 覆盖 aweme_id 和浏览器 detail 均重新验证通过。
+- 历史通用化：`browser_a_bogus.mjs` 曾增加 `--request-path` 精确匹配任意抖音 XHR 路径；当前进一步改为由 `--replace-query` 传入任意 query 替换表，Python 入口使用 `generate_a_bogus_for_request(page_url, request_path, query_replacements=None)`。
+- 历史执行计划：完整 detail 入口曾尝试“初始化阶段改写 BDM 之前的原始 query -> 浏览器生成 a_bogus 并发送 -> 浏览器读取 response”；该 hook 方案保留在桥接脚本中供实验，不作为完整 detail 默认路径。
+- 计划已执行完成：`browser_detail_capture.mjs` 在页面初始化阶段保留 `XMLHttpRequest.prototype.open` 的后续赋值，并包裹 BDM wrapper，使替换后的原始 URL 先进入 BDM 再生成 `a_bogus`；`browser_detail.py` 通过 `run_bridge_json()` 直接接收浏览器 detail 响应。普通 detail 与源页面/目标页面不同的 aweme_id 替换均实测 `200 application/json`、含 `aweme_detail`、`a_bogus` 长度 180；此前替换后 403 的问题已定位为 hook 时序错误并修复。
+- 批量短链验证：`OCFtqmB1deE` 图文、`eAFvtkuq8dM` 视频、`u5FrdENm_r8` 视频、`sCAyVoQTdlQ` 图文、`WCN87R7eXtQ` 视频、`i_Wbwm0SVno` 视频均已解析并通过浏览器 detail；`AxBinfaYolc` 实际跳转为 `/share/slides/7637410157160769251/`，按图集补测同样返回 `200` 和 `aweme_detail`（3 张图片），不是直播域名。
+- 上一方案已废止：曾将完整 detail 改为直接导航目标详情页，但用户明确要求保留 `page.goto` 源页面初始化后再自行替换参数，因此恢复源页面 + BDM 签名前替换链路。
+- 当前执行结果：`_platform/douyin/browser/browser_detail.py` 重新使用 `browser_aweme_id` 作为源页面、`aweme_id` 作为目标参数；浏览器通过 `page.goto` 初始化页面，hook 只在 BDM wrapper 之前替换 detail 的目标 `aweme_id`，随后由页面原有 XHR/BDM 生成 `a_bogus` 并发送请求。普通 detail 和源/目标 ID 不同的 detail 均已验证 `200 application/json`、包含目标 `aweme_detail`、`a_bogus` 长度 180；Python 不重放请求，未新增测试用例。
+- 最新通用化：新增 `capture_browser_request(page_url, request_path, query_replacements, response_field, request_method, host_suffix)`，浏览器桥接脚本不再写死 detail 路径、`aweme_id` 或 `aweme_detail`；query 替换采用原始 URL 字符串，仅替换指定值后继续进入页面原有 XHR/BDM。`generate_a_bogus_for_request` 同样改为接收通用 query 替换表。
+- 最新职责拆分：`_platform/douyin/browser/douyin_detail_browser.py` 新增 `handle_detail_with_browser()`，集中处理浏览器 detail 响应校验、`requestHeaders` 提取和数据处理器调用；`_platform/douyin/douyin_adapter.py` 已删除内嵌 `_browser_detail`，视频、笔记和图集分支统一调用浏览器模块入口。Python AST、Node `--check`、模块导入和真实 detail 浏览器请求均已验证；未新增测试用例。
+- 最新模块拆分：新增 `_platform/douyin/browser/browser_request_capture.py`，集中管理 `Browser` 实例、Patchright 桥接脚本路径、通用请求校验、浏览器响应捕获和 a_bogus 捕获；`douyin_detail_browser.py` 只保留 detail 业务逻辑，并通过 `browser/__init__.py` 继续对外暴露原有能力。本轮 Python AST、Node `--check`、公共导入和真实 detail 浏览器请求均已验证。
+- 最新用户主页接入：新增 `_platform/douyin/browser/douyin_post_browser.py`，通过 `page.goto` 捕获 `/aweme/v1/web/aweme/post/` 首屏响应，并将 `aweme_list` 逐条交给现有数据处理器；`douyin_adapter_browser` 已路由 `/user/{sec_user_id}` 和 `/share/user/{sec_user_id}`。main 中 6 个用户主页均实测返回 `200`，作品数为 18 或 21；未登录环境下 `max_cursor` 分页暂不作为验收项。
+- 最新清理：已删除 `_platform/douyin/browser/browser_a_bogus.mjs` 及其 `generate_a_bogus_for_request()`、`generate_a_bogus_with_browser()` Python 入口；当前详情和用户主页继续使用 `browser_detail_capture.mjs`，纯算法签名继续使用 `_platform/douyin/api/sign/a_bogus.py`。下一步无需恢复浏览器单独提取 `a_bogus` 链，除非后续新增明确调用方。
+- 最新 main 验证：使用 `python -m _platform.douyin.douyin_adapter` 运行时，7 个短链对应的纯 URL 均解析成功，视频、图片和音频资源均返回并有非零文件；`OCFtqmB1deE` 的图片/音频因文件已存在而跳过，`eAFvtkuq8dM`、`AxBinfaYolc`、`u5FrdENm_r8`、`sCAyVoQTdlQ`、`WCN87R7eXtQ`、`i_Wbwm0SVno` 均有本次保存日志。main 原样执行在第 4 条复制文案处中断，因为 `browser_request()` 只接受纯 URL；图集多张图片当前生成同名文件，后续会被下载器跳过。直接执行脚本还会因项目根路径未加入 `sys.path` 报 `_platform` 导入错误。
+- 当前重构已完成：按用户要求只将配置迁移到 `_platform` 外的 `config.Configuration`，各平台和下载器已不再导入 `application.entity.config_entity`；旧记录/API/service 未迁移，根目录旧 `main.py` 已移除，`application/` 已整体删除，`store.db` 用户数据文件保留。Python AST、配置初始化和主要平台模块导入验证通过。

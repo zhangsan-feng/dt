@@ -6,6 +6,7 @@
 - 最新调整：`browser_detail_capture.mjs` 不再启动持久化 Profile，始终使用临时隔离 Context；每次运行仍可通过 `DOUYIN_COOKIE` 注入抖音 Cookie，返回结果中的 `profileMode` 固定为 `isolated`。
 - 最新清理：已删除整个项目 `.runtime` 目录，包括旧 Profile 和 `js-reverse-mcp-cdp*` 运行目录；未保留本地浏览器运行状态。
 - 最新调整：`utils/browser_call_js.mjs`、`browser_request.mjs`、`browser_request_listener.mjs` 也已移除持久化 Profile，统一使用临时隔离 Context；详情桥接和通用桥接均不再依赖 `.runtime`。
+- 最新重构：新增 `utils/browser_runtime.mjs`，统一封装通用桥接脚本的参数读取、Patchright 加载、浏览器/Context/Page 创建和关闭；三个脚本仅保留各自的页面执行、主响应读取和响应监听逻辑。
 - 已完成：使用工作区 `js-reverse-mcp` 抓取详情 XHR，并对同一视频做 fresh capture；浏览器请求为 38/39 个 query 参数，包含 `a_bogus`、`timestamp` 和 `x-secsdk-web-signature`，返回 `200 application/json` 且包含 `aweme_detail`。
 - 已验证：将 MCP 抓到的完整 URL 和请求头用 Python `httpx` 重放成功（`200`、`status_code=0`、包含 `aweme_detail`）；删除 SecSDK 字段后仅换成纯算法 `a_bogus`，返回 `200 text/plain` 空体；保留旧 SecSDK 字段但替换 `a_bogus`，返回 `403 text/plain`。纯签名器本身可生成非空值，但当前不能独立通过详情接口。
 - 已验证：当前 Python `gen_detail_params_sign` 能调用纯签名器，但 `ms_token.gen_ms_token()` 实测没有返回 `x-ms-token`，所以生成参数还缺少浏览器请求中的有效 `msToken`；Windows 系统 `curl.exe`（Schannel）重放同一抓包返回 `SEC_E_NO_CREDENTIALS`、HTTP 状态 `000`，Python 重放不受此 TLS 传输问题影响。

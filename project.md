@@ -24,6 +24,7 @@ _platform/douyin/browser/
 
 utils/
     browser.py 提供 BrowserObject；browser_call_js 在浏览器页面上下文执行 JS 函数，browser_request_listener 打开页面并监听指定响应接口，browser_request 获取页面主请求和主响应；三者均使用临时隔离浏览器环境。
+    browser_runtime.mjs 统一提供通用浏览器桥接的参数读取、Patchright 加载、临时 Browser/Context/Page 创建和资源关闭能力。
     browser.py 的 run_bridge_json() 是通用桥接脚本执行入口，抖音专用逻辑不放在 utils 中。
     browser_call_js.mjs 负责启动临时隔离浏览器并通过 page.evaluate 执行页面 JS 函数文件。
     browser_request_listener.mjs 负责启动临时隔离浏览器、注册 response 监听器并返回匹配接口的请求和响应对象。

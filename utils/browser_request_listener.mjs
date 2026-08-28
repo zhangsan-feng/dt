@@ -1,17 +1,13 @@
-import path from "node:path";
-import { pathToFileURL } from "node:url";
+import {
+  closeBrowser,
+  launchBrowser,
+  openPage,
+  option,
+  positionalArgs,
+  timeoutMs,
+} from "./browser_runtime.mjs";
 
 const DETAIL_PATH = "/aweme/v1/web/aweme/detail/";
-
-function option(name, fallback = "") {
-  const prefix = `--${name}=`;
-  const value = process.argv.find((arg) => arg.startsWith(prefix));
-  return value ? value.slice(prefix.length) : fallback;
-}
-
-function positionalArgs() {
-  return process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
-}
 
 function isTextContent(contentType) {
   return /(?:^|\/)json|(?:^|\/)javascript|(?:^|\/)xml|(?:^|\/)text|html/i.test(contentType);
@@ -137,23 +133,6 @@ function waitForResponse(page, responsePattern, expectedAwemeId = "") {
   });
 }
 
-async function loadChromium() {
-  const configured = process.env.BROWSER_PATCHRIGHT_MODULE;
-  const modulePath = configured
-    ? path.resolve(configured)
-    : path.join(
-        process.cwd(),
-        "js-reverse-mcp",
-        "node_modules",
-        "@zhizhuodemao",
-        "patchright",
-        "index.mjs",
-      );
-  const loaded = await import(pathToFileURL(modulePath).href);
-  if (!loaded.chromium) throw new Error("Patchright chromium export is unavailable");
-  return loaded.chromium;
-}
-
 async function main() {
   const [targetUrl, responsePattern] = positionalArgs();
   if (!/^https?:\/\//i.test(targetUrl || "")) {
@@ -163,30 +142,19 @@ async function main() {
     throw new Error("browser_request_listener requires a response URL pattern");
   }
 
-  const chromium = await loadChromium();
-  const headless = option("headless", process.env.BROWSER_HEADLESS || "false") === "true";
-  const timeout = Number(option("timeout-ms", "75000"));
-  const launchOptions = {
-    channel: option("channel", "chrome"),
-    headless,
-    args: ["--test-type", "--hide-crash-restore-bubble"],
-  };
-  const contextOptions = { viewport: null, ignoreHTTPSErrors: true };
   let context;
   let browser;
 
   try {
-    browser = await chromium.launch(launchOptions);
-    context = await browser.newContext(contextOptions);
-
-    const page = context.pages()[0] || (await context.newPage());
+    ({ browser, context } = await launchBrowser());
+    const page = await openPage(context);
     const overrideAwemeId = option("override-aweme-id");
     if (overrideAwemeId && !/^\d{8,}$/.test(overrideAwemeId)) {
       throw new Error("override-aweme-id must be a numeric value");
     }
     const initialResponsePromise = waitForResponse(page, responsePattern);
 
-    await page.goto(targetUrl, { waitUntil: "domcontentloaded", timeout }).catch((error) => {
+    await page.goto(targetUrl, { waitUntil: "domcontentloaded", timeout: timeoutMs() }).catch((error) => {
       console.error(`page navigation did not finish: ${error.message}`);
     });
     let found = await initialResponsePromise;
@@ -222,8 +190,7 @@ async function main() {
       }),
     );
   } finally {
-    if (context) await context.close().catch(() => {});
-    if (browser) await browser.close().catch(() => {});
+    await closeBrowser({ browser, context });
   }
 }
 
